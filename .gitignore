@@ -1,0 +1,9 @@
+# Modules
+node_modules/
+package-lock.json
+
+# Next build
+.next/
+
+# Env files
+.env
