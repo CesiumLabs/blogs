@@ -12,6 +12,9 @@ module.exports = {
       transparent: 'transparent',
       black: '#000',
       white: '#fff',
+      theme: {
+        100: '#1f2937'
+      },
       grey: {
         100: '#f7fafc',
         200: '#edf2f7',
@@ -251,6 +254,7 @@ module.exports = {
         '"Courier New"',
         'monospace',
       ],
+      changa: ['"Changa"']
     },
     fontSize: theme => ({
       xs: '0.75rem',
@@ -304,6 +308,7 @@ module.exports = {
     },
     margin: (theme, { negative }) => ({
       auto: 'auto',
+      2.5: '0.55rem',
       ...theme('spacing'),
       ...negative(theme('spacing')),
     }),
