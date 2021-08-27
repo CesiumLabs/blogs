@@ -9,3 +9,7 @@ html {
 body {
     margin: 0;
 }
+
+.w-300 {
+    width: 300px;
+}
