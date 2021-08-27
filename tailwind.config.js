@@ -1,6 +1,5 @@
 module.exports = {
   purge: false,
-  presets: [],
   darkMode: false, 
   theme: {
     screens: {
