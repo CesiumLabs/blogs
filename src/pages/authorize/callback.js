@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import axios from 'axios';
+import { getAuthID } from '../../utils';
 
 export default function Callback({ redirect, forbidden, error }) {
     useEffect(() => {
@@ -13,7 +14,7 @@ export default function Callback({ redirect, forbidden, error }) {
 }
 
 Callback.getInitialProps = async (ctx) => {
-    if (!ctx.query.code) return { redirect: true };
+    if (!ctx.query.code || getAuthID(ctx.req)) return { redirect: true };
     
     try {
         const { data } = await axios.get('https://backend.snowflakedev.org/api/authorize', {
