@@ -6,11 +6,11 @@ import { getAuthID } from '../../utils';
 export default function Callback({ redirect, forbidden, error }) {
     useEffect(() => {
         if (redirect) window.location.href = '/';
+        else if (error) window.location.href = '/api/panel/login';
     });
 
     if (redirect) return 'Redirecting you...';
     else if (forbidden) return 'You are not allowed to enter the admin panel...';
-    else if (error) return 'Caught an error. Check the console to debug...';
     else return null;
 }
 
@@ -37,9 +37,6 @@ Callback.getInitialProps = async (ctx) => {
 
         return {};
     } catch(e) {
-        console.log(e);
         return { error: true }
     }
-
-    return {};
 }
