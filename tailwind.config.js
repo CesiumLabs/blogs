@@ -1,5 +1,8 @@
 module.exports = {
-  purge: false,
+  purge: {
+    enabled: true,
+    content: ['./src/pages/**/*.js', './src/components/**/*.js']
+  },
   darkMode: false, 
   theme: {
     screens: {
