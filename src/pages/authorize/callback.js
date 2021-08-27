@@ -13,7 +13,6 @@ export default function Callback({ redirect }) {
 Callback.getInitialProps = async (ctx) => {
     if (!ctx.query.code) return { redirect: true };
     
-    await connectMongoose();
     const { data } = await axios.get('https://backend.snowflakedev.cf/api/authorize?code=' + ctx.query.code, {
         headers: {
             redirect_uri: encodeURIComponent(`${process.env.ORIGIN}/authorize/callback`)
