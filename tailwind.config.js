@@ -12,7 +12,10 @@ module.exports = {
       transparent: 'transparent',
       black: '#000',
       white: '#fff',
-      blurple: '#7298da',
+      blurple: {
+        default: '#7298da',
+        200: '#4e6791'
+      },
       theme: {
         100: '#1f2937'
       },

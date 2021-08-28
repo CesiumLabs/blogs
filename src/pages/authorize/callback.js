@@ -1,6 +1,8 @@
 import cookie from 'cookie';
 import { useEffect } from 'react';
 import axios from 'axios';
+import connectMongoose from '../../middleware/mongodb';
+import { User } from '../../utils/schemas';
 import { getAuthID, defaultCookieOptions } from '../../utils';
 
 export default function Callback({ redirect, forbidden, error }) {
@@ -27,12 +29,11 @@ Callback.getInitialProps = async (ctx) => {
         const staff = staffs.data.find(x => x.id === data.data.id);
         if (!staff) return { forbidden: true };
         
-        ctx.res.setHeader('Set-Cookie', [
-            cookie.serialize('auth_id', data.data.accessToken, defaultCookieOptions),
-            cookie.serialize('rank', staff.admin ? 1 : 2, defaultCookieOptions)
-        ]);
+        ctx.res.setHeader('Set-Cookie', [cookie.serialize('auth_id', data.data.accessToken, defaultCookieOptions)]);
+        await connectMongoose();
+        await new User({ id: data.data.id, rank: staff.admin ? 1 : 2 }).save()
 
-        return {};
+        return { redirect: true };
     } catch(e) {
         return { error: true }
     }

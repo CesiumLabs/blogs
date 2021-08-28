@@ -1,6 +1,6 @@
 import mongoose, { Schema } from "mongoose";
 
-const Blog = new Schema({
+const blog = new Schema({
     name: {
         type: String,
         required: true
@@ -35,5 +35,21 @@ const Blog = new Schema({
     }
 });
 
+const user = new Schema({
+    id: {
+        type: String,
+        required: true
+    },
+    rank: {
+        type: Number,
+        required: true
+    }, // 1 means admin, 2 means developer 
+    github: String,
+    twitter: String,
+    website: String,
+    bio: String
+});
+
 mongoose.models = {};
-export default mongoose.model('blogs', Blog);
+export const Blog = mongoose.model('blogs', blog);
+export const User = mongoose.model('users', user);
