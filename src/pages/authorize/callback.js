@@ -7,7 +7,7 @@ import { getAuthID, getRank, defaultCookieOptions } from "../../utils";
 
 export default function Callback({ redirect, forbidden, error }) {
     useEffect(() => {
-        if (redirect) window.location.href = "/";
+        if (redirect) window.location.href = "/me";
         else if (error) window.location.href = "/api/panel/login";
     });
 
