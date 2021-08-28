@@ -1,6 +1,7 @@
 # Modules
 node_modules/
 package-lock.json
+yarn.lock
 
 # Next build
 .next/
