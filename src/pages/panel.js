@@ -1,6 +1,5 @@
-import axios from 'axios';
-import { getAuthID } from '../utils';
 import Frame from '../components/frame';
+import getAuthInfo from '../middleware/getAuthInfo';
 import connectMongoose from '../middleware/mongodb';
 
 export default function Panel({ forbidden, avatarURL, username }) {
@@ -17,13 +16,4 @@ export default function Panel({ forbidden, avatarURL, username }) {
     </Frame>
 }
 
-Panel.getInitialProps = async (ctx) => {
-    const token = getAuthID(ctx.req);
-    if (!token) return ctx.res.redirect('/api/panel/login');
-    
-    const { data } = await axios.get('https://backend.snowflakedev.org/api/authorize', { 
-        headers: { authorization: `Bearer ${token}` } 
-    });
-
-    return data.data
-}
+Panel.getInitialProps = getAuthInfo;
