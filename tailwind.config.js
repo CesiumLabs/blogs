@@ -12,6 +12,7 @@ module.exports = {
       transparent: 'transparent',
       black: '#000',
       white: '#fff',
+      twitter: '#1da1f2',
       blurple: {
         default: '#7298da',
         200: '#4e6791'

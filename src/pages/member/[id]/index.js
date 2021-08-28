@@ -1,6 +1,6 @@
 import axios from 'axios';
-import { useEffect } from 'react';
 import Frame from '../../../components/frame';
+import { SocialButton } from '../../../components/button';
 import connectMongoose from '../../../middleware/mongodb';
 import { User } from '../../../utils/schemas';
 
@@ -17,7 +17,7 @@ export default function Member({
     website
 }) {
     //useEffect(() => (document.body || document.documentElement).style.backgroundColor = '#253347');
-    
+
     if (notFound) return <Frame title="404" description={`No staff found with id ${id}!`}>
         No staff found...
     </Frame>
@@ -35,9 +35,10 @@ export default function Member({
                             {dev ? <span className="bg-blurple-200 text-white font-bold py-1 px-2 rounded-sm ml-1 mt-1">DEVELOPER</span> : null}
                         </div>
                         <div className="-ml-1">
-                            <a href={`/member/${id}/blogs`} className="ml-1 mt-4 inline-block text-white rounded-default px-4 py-2 bg-orange-500 font-bold cursor-pointer">
-                                <i className="fas fa-book"/> BLOGS
-                            </a>
+                            <SocialButton href={`/member/${id}/blogs`} svg="fas fa-book" color="bg-orange-500">BLOGS</SocialButton>
+                            {twitter ? <SocialButton href={`https://twitter.com/${twitter}`} svg="fab fa-twitter" color="bg-twitter">TWITTER</SocialButton> : null}
+                            {github ? <SocialButton href={`https://github.com/${github}`} svg="fab fa-github" color="bg-grey-700">GITHUB</SocialButton> : null}
+                            {website ? <SocialButton href={website} svg="far fa-window-restore" color="bg-indigo-500">WEBSITE</SocialButton> : null}
                         </div>
                     </div>
                 </div>
@@ -55,5 +56,8 @@ Member.getInitialProps = async (ctx) => {
     let user = await User.findOne({ id: ctx.query.id });
     if (!user) return { notFound: true, id: ctx.query.id };
 
-    return { ...staff, ...user }
+    return { 
+        ...user.toJSON(),
+        ...staff
+    }
 }
