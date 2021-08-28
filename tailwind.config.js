@@ -1,8 +1,5 @@
 module.exports = {
-  purge: {
-    enabled: true,
-    content: ['./src/pages/*.js', './src/pages/**/*.js', './src/components/**/*.js']
-  },
+  purge: ['./src/**/*.js'],
   darkMode: false, 
   theme: {
     screens: {
@@ -15,6 +12,7 @@ module.exports = {
       transparent: 'transparent',
       black: '#000',
       white: '#fff',
+      blurple: '#7298da',
       theme: {
         100: '#1f2937'
       },
@@ -179,6 +177,7 @@ module.exports = {
       sm: '0.125rem',
       default: '0.25rem',
       lg: '0.5rem',
+      xl: '0.75rem',
       full: '9999px',
     },
     borderWidth: {
@@ -265,6 +264,7 @@ module.exports = {
       base: '1rem',
       lg: '1.125rem',
       xl: '1.25rem',
+      '5xl': '35px',
       ...theme('spacing'),
     }),
     fontWeight: {
