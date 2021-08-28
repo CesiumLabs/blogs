@@ -1,17 +1,19 @@
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import Frame from '../components/frame';
 
 export default function Settings() {
+    const customBgInputElement = useRef(null);
+
     useEffect(() => {
         window.addEventListener('load', () => {
-            const customBgInputElement = document.getElementById('custom_bg_input');
+            if (!customBgInputElement.current) return;
             const customBgColor = localStorage.getItem('custom_bg');
-            customBgInputElement.value = customBgColor || 'whitesmoke';
+            customBgInputElement.current.value = customBgColor || 'whitesmoke';
 
-            customBgInputElement.addEventListener('keydown', (e) => {
-                if (e.key === "Enter" && customBgInputElement.value) {
-                    localStorage.setItem('custom_bg', customBgInputElement.value);
-                    (document.body || document.documentElement).style.backgroundColor = customBgInputElement.value;
+            customBgInputElement.current.addEventListener('keydown', (e) => {
+                if (e.key === "Enter" && customBgInputElement.current.value) {
+                    localStorage.setItem('custom_bg', customBgInputElement.current.value);
+                    (document.body || document.documentElement).style.backgroundColor = customBgInputElement.current.value;
                 }
             });
         });
@@ -27,7 +29,7 @@ export default function Settings() {
                             <p className="opacity-75">The background color you want to see the blog with! Default is whitesmoke.</p>
                         </td>
                         <td>
-                            <input className="ml-2 px-2 py-1 rounded-default outline-none text-black block w-full" placeholder="Your color here..." id="custom_bg_input"/>
+                            <input className="ml-2 px-2 py-1 rounded-default outline-none text-black block w-full" placeholder="Your color here..." ref={customBgInputElement} />
                         </td>
                     </tr>
                 </table>
