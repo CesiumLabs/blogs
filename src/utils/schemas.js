@@ -1,4 +1,4 @@
-import { model, Schema } from "mongoose";
+import mongoose, { Schema } from "mongoose";
 
 const Blog = new Schema({
     name: {
@@ -35,4 +35,5 @@ const Blog = new Schema({
     }
 });
 
-export default model('blogs', Blog);
+mongoose.models = {};
+export default mongoose.model('blogs', Blog);
