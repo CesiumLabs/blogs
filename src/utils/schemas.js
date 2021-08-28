@@ -43,7 +43,7 @@ const user = new Schema({
     rank: {
         type: Number,
         required: true
-    }, // 1 means admin, 2 means developer 
+    }, // 1 means admin, 2 means developer and 3 means moderator staff
     github: String,
     twitter: String,
     website: String,

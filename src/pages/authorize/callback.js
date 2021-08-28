@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 import axios from 'axios';
 import connectMongoose from '../../middleware/mongodb';
 import { User } from '../../utils/schemas';
-import { getAuthID, defaultCookieOptions } from '../../utils';
+import { getAuthID, getRank, defaultCookieOptions } from '../../utils';
 
 export default function Callback({ redirect, forbidden, error }) {
     useEffect(() => {
@@ -31,7 +31,7 @@ Callback.getInitialProps = async (ctx) => {
         
         ctx.res.setHeader('Set-Cookie', [cookie.serialize('auth_id', data.data.accessToken, defaultCookieOptions)]);
         await connectMongoose();
-        await new User({ id: data.data.id, rank: staff.admin ? 1 : 2 }).save()
+        await new User({ id: data.data.id, rank: getRank(staff.admin, staff.dev) }).save()
 
         return { redirect: true };
     } catch(e) {
