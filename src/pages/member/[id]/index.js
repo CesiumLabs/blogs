@@ -9,8 +9,7 @@ export default function Member({
     username, 
     avatar,
     id,
-    admin,
-    dev,
+    rank,
     bio,
     twitter,
     github,
@@ -26,14 +25,10 @@ export default function Member({
         <div className="p-4 md:p-10">
             <div className="bg-theme-100 rounded-lg" style={{ padding: '1rem' }}>
                 <div className="md:flex flex-wrap">
-                    <img className="md:w-300 rounded-xl block" src={`${avatar}`} draggable="false" alt={username}/>
+                    <img className="md:w-300 rounded-full block" src={`${avatar}`} draggable="false" alt={username}/>
                     <div className="md:mt-4 md:ml-4">
                         <h2 className="text-white font-bold text-5xl">{username}</h2>
                         <p className="opacity-75 text-white block mb-2 -mt-2">{bio || 'No description has been set!'}</p>
-                        <div className="-ml-1">
-                            {true ? <span className="bg-red-700 text-white font-bold py-1 px-2 rounded-sm ml-1 mt-1">ADMIN</span> : null}
-                            {dev ? <span className="bg-blurple-200 text-white font-bold py-1 px-2 rounded-sm ml-1 mt-1">DEVELOPER</span> : null}
-                        </div>
                         <div className="-ml-1">
                             <SocialButton href={`/member/${id}/blogs`} svg="fas fa-book" color="bg-orange-500">BLOGS</SocialButton>
                             {twitter ? <SocialButton href={`https://twitter.com/${twitter}`} svg="fab fa-twitter" color="bg-twitter">TWITTER</SocialButton> : null}
