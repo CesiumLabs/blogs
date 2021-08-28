@@ -15,8 +15,6 @@ export default function Member({
     github,
     website
 }) {
-    //useEffect(() => (document.body || document.documentElement).style.backgroundColor = '#253347');
-
     if (notFound) return <Frame title="404" description={`No staff found with id ${id}!`}>
         No staff found...
     </Frame>
