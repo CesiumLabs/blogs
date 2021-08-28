@@ -1,12 +1,13 @@
 import axios from 'axios';
+import cookie from 'cookie';
 
 export default ({ req, res }) => {
-    const token = getAuthID(req);
-    if (!token) return res.redirect('/api/panel/login');
+    const { auth_id, rank } = cookie.parse(req.headers.cookie || {});
+    if (!auth_id) return res.redirect('/api/panel/login');
     
     const { data } = await axios.get('https://backend.snowflakedev.org/api/authorize', { 
-        headers: { authorization: `Bearer ${token}` } 
+        headers: { authorization: `Bearer ${auth_id}` } 
     });
 
-    return data.data;
+    return { user: data, rank };
 }
