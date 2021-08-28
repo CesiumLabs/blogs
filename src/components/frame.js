@@ -22,7 +22,7 @@ export default function Frame({
             <meta itemProp="description" content={description}/>
             <meta itemProp="image" content={image}/>
             
-            <meta property="og:url" content="https://blog.snowflakedev.org"/>
+            <meta property="og:url" content="https://blogs.snowflakedev.org"/>
             <meta property="og:type" content="website"/>
             <meta property="og:title" content={title}/>
             <meta property="og:description" content={description}/>
