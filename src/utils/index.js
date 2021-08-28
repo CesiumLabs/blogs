@@ -1,4 +1,4 @@
-import cookie from 'cookie';
+import cookie from "cookie";
 
 export function getAuthID(req) {
     return cookie.parse(req.headers.cookie || {}).auth_id;
@@ -13,8 +13,8 @@ export function getRank(isAdmin, isDev) {
 export const defaultCookieOptions = {
     httpOnly: true,
     secure: true,
-    maxAge: 8.64e+8,
+    maxAge: 8.64e8,
     domain: process.env.ORIGIN,
-    path: '/',
+    path: "/",
     port: 3000
 };
