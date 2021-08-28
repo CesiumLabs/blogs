@@ -34,8 +34,8 @@ export default function Frame({
             <meta name="twitter:image" content={image}/>
             <meta name="twitter:card" content="summary_large_image"/>
 
-		    <link href="https://fonts.googleapis.com/css?family=News+Cycle|Titillium+Web:wght@700|Changa:wght@800" rel="stylesheet"/>
-		    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.1/css/all.css"/>
+            <link href="https://fonts.googleapis.com/css?family=News+Cycle|Titillium+Web:wght@700|Changa:wght@800" rel="stylesheet"/>
+            <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.1/css/all.css"/>
         </Head>
 
         {children}
