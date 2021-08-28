@@ -31,7 +31,9 @@ Callback.getInitialProps = async (ctx) => {
         
         ctx.res.setHeader('Set-Cookie', [cookie.serialize('auth_id', data.data.accessToken, defaultCookieOptions)]);
         await connectMongoose();
-        await new User({ id: data.data.id, rank: getRank(staff.admin, staff.dev) }).save()
+
+        const user = await User.findOne({ id: data.data.id });
+        if (!user) await new User({ id: data.data.id, rank: getRank(staff.admin, staff.dev) }).save()
 
         return { redirect: true };
     } catch(e) {
