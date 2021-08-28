@@ -1,44 +1,39 @@
-import Head from 'next/head';
-import Header from './header';
+import Head from "next/head";
+import Header from "./header";
 
-export default function Frame({ 
-    title, 
-    description = "A blog written by the snowflake development community",
-    image = "https://snowflakedev.org/images/logo.png",
-    children
-}) {
+export default function Frame({ title, description = "A blog written by the snowflake development community", image = "https://snowflakedev.org/images/logo.png", children }) {
+    title = `Snowflake Blog${title ? ` | ${title}` : ""}`;
 
-    title = `Snowflake Blog${title ? ` | ${title}` : ''}`;
+    return (
+        <>
+            <Header />
+            <Head>
+                <title>{title}</title>
+                <meta name="description" content={description} />
 
-    return <>
-        <Header/>
-        <Head>
-            <title>{title}</title>
-            <meta name="description" content={description}/>
-            
-            <link rel='icon' type='image/png' href="https://snowflakedev.org/images/logotrans.png"/>
-            
-            <meta itemProp="name" content={title}/>
-            <meta itemProp="description" content={description}/>
-            <meta itemProp="image" content={image}/>
-            
-            <meta property="og:url" content="https://blogs.snowflakedev.org"/>
-            <meta property="og:type" content="website"/>
-            <meta property="og:title" content={title}/>
-            <meta property="og:description" content={description}/>
-            <meta property="og:thumbnail" content={image}/>
-            <meta property="og:color" content="#7298da"/>
+                <link rel="icon" type="image/png" href="https://snowflakedev.org/images/logotrans.png" />
 
-            <meta name="twitter:title" content={title}/>
-            <meta name="twitter:description" content={description}/>
-            <meta name="twitter:image" content={image}/>
-            <meta name="twitter:card" content="summary_large_image"/>
+                <meta itemProp="name" content={title} />
+                <meta itemProp="description" content={description} />
+                <meta itemProp="image" content={image} />
 
-            <link href="https://fonts.googleapis.com/css?family=News+Cycle|Titillium+Web:wght@700|Changa:wght@800" rel="stylesheet"/>
-            <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.1/css/all.css"/>
-        </Head>
+                <meta property="og:url" content="https://blogs.snowflakedev.org" />
+                <meta property="og:type" content="website" />
+                <meta property="og:title" content={title} />
+                <meta property="og:description" content={description} />
+                <meta property="og:thumbnail" content={image} />
+                <meta property="og:color" content="#7298da" />
 
-        {children}
-    </>
+                <meta name="twitter:title" content={title} />
+                <meta name="twitter:description" content={description} />
+                <meta name="twitter:image" content={image} />
+                <meta name="twitter:card" content="summary_large_image" />
 
+                <link href="https://fonts.googleapis.com/css?family=News+Cycle|Titillium+Web:wght@700|Changa:wght@800" rel="stylesheet" />
+                <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.1/css/all.css" />
+            </Head>
+
+            {children}
+        </>
+    );
 }

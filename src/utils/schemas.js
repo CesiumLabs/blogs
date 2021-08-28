@@ -13,8 +13,8 @@ const blog = new Schema({
         type: String,
         required: true
     },
-    author: { 
-        type: String, 
+    author: {
+        type: String,
         required: true
     },
     tags: {
@@ -51,5 +51,5 @@ const user = new Schema({
 });
 
 mongoose.models = {};
-export const Blog = mongoose.model('blogs', blog);
-export const User = mongoose.model('users', user);
+export const Blog = mongoose.model("blogs", blog);
+export const User = mongoose.model("users", user);
