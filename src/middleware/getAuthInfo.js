@@ -4,7 +4,7 @@ import { defaultCookieOptions } from "../utils";
 
 export default async function getAuthInfo({ req, res }) {
     res.redirect = (x) => res.writeHead(302, { Location: x }).end();
-    const { auth_id, rank } = cookie.parse(req.headers.cookie || {});
+    const { auth_id, rank } = cookie.parse(req.headers.cookie || "");
     if (!auth_id) return res.redirect("/api/panel/login");
 
     try {
