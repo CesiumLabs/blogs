@@ -8,7 +8,12 @@ export default function Member({ notFound, username, avatar, id, rank, bio, twit
     if (notFound)
         return (
             <Frame title="404" description={`No staff found with id ${id}!`}>
-                No staff found...
+                <div className="p-4 md:p-10">
+                    <div className="bg-theme-100 rounded-lg text-center text-white py-10">
+                        <h1 className="font-bold text-8xl md:text-10xl">404</h1>
+                        <p className="opacity-75 text-lg -mt-2">User {id} {notFound}</p>
+                    </div>
+                </div>
             </Frame>
         );
 
@@ -56,11 +61,11 @@ export default function Member({ notFound, username, avatar, id, rank, bio, twit
 Member.getInitialProps = async (ctx) => {
     const { data: staffs } = await axios.get("https://api.snowflakedev.org/api/d/staffs");
     const staff = staffs.data.find((x) => x.id === ctx.query.id);
-    if (!staff) return { notFound: true, id: ctx.query.id };
+    if (!staff) return { notFound: "is not a staff!", id: ctx.query.id };
 
     await connectMongoose();
     let user = await User.findOne({ id: ctx.query.id });
-    if (!user) return { notFound: true, id: ctx.query.id };
+    if (!user) return { notFound: "has never accessed the site to show the profile!", id: ctx.query.id };
 
     return {
         ...user.toJSON(),
