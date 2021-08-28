@@ -1,7 +1,7 @@
 import cookie from 'cookie';
 import { useEffect } from 'react';
 import axios from 'axios';
-import { getAuthID } from '../../utils';
+import { getAuthID, defaultCookieOptions } from '../../utils';
 
 export default function Callback({ redirect, forbidden, error }) {
     useEffect(() => {
@@ -23,16 +23,13 @@ Callback.getInitialProps = async (ctx) => {
         });
 
         const { data: staffs } = await axios.get('https://api.snowflakedev.org/api/d/staffs');
-        if (!staffs.data.find(x => x.id === data.data.id)) return { forbidden: true };
+        const staff = staffs.data.find(x => x.id === data.data.id);
+        if (!staff) return { forbidden: true };
         
-        ctx.res.setHeader('Set-Cookie', [cookie.serialize('auth_id', data.data.accessToken, {
-            httpOnly: true,
-            secure: true,
-            maxAge: 8.64e+8,
-            domain: process.env.ORIGIN,
-            path: '/',
-            port: 3000
-        })]);
+        ctx.res.setHeader('Set-Cookie', [
+            cookie.serialize('auth_id', data.data.accessToken, defaultCookieOptions),
+            cookie.serialize('rank', staff.admin ? 1 : 2, defaultCookieOptions)
+        ]);
 
         return {};
     } catch(e) {
