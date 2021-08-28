@@ -11,6 +11,7 @@ export default function Callback({ redirect, forbidden, error }) {
 
     if (redirect) return 'Redirecting you...';
     else if (forbidden) return 'You are not allowed to enter the admin panel...';
+    else return null;
 }
 
 Callback.getInitialProps = async (ctx) => {
