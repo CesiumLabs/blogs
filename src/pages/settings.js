@@ -26,7 +26,7 @@ export default function Settings() {
                 <h1 className="text-white text-5xl font-bold">Settings</h1>
                     <p className="opacity-75 text-white">Settings for the snowflake blog website's user interface.</p>
 
-                    <table className="text-white w-full mt-2">
+                    <table className="text-white w-full mt-3">
                         <tr>
                             <td className="w-1/4">
                                 <p className="text-xl font-bold">Background Color</p>

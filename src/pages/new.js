@@ -10,12 +10,30 @@ export default function New() {
                     <h1 className="text-white text-5xl font-bold">New Blog</h1>
                     <p className="opacity-75 text-white">Remember to make your blog perfect, attractive and useful!</p>
 
-                    <table className="text-white w-full mt-2">
+                    <table className="text-white w-full mt-3">
                         <Input name="Name" description="The name of the blog. Required." placeholder="Awesome blog." id="name_input"/>
                         <Input name="Description" description="The short description of your blog. Required." placeholder="My awesome blog." id="dsc_input"/>
                         <Input name="Tags" description="The tags for the blog. Maximum 5 tags. Seperated by comma." placeholder="tech, javascript, web" id="tags_input"/>
                         <Input name="Thumbnail" description="The thumbnail url of the flag. Required." placeholder="https://example.com/image.png" id="thumbnail_input"/>
                     </table>
+
+                    <p className="text-xl font-bold text-white">Content</p>
+                    <p className="opacity-75 mb-3 text-white">The main content part of the blog...</p>
+                    <textarea className="mt-1 rounded-sm p-2 outline-none resize-y w-full min-h-300" id="content_input"/>
+
+                    <a className="rounded-sm px-2 py-1 bg-red-500 mt-3 block text-center text-white cursor-pointer" onClick={() => {
+                        const blog = {
+                            name: document.getElementById('name_input').value,
+                            description: document.getElementById('dsc_input').value,
+                            tags: document.getElementById('tags_input').value.split(', '),
+                            thumbnail: document.getElementById('thumbnail_input').value
+                        };
+
+                        if (!blog.name) return alert("No name has been provided.");
+                        if (blog.description.length < 10) return alert("Description for the blog is way too short.");
+                        if (blog.tags.length > 5) return alert("You have provided more than 5 tags.");
+                        if (!blog.thumbnail) return alert("No thumbnail has been provided for the thumbnail.");
+                    }}>Submit</a>
                 </div>
             </div>
         </Frame>
