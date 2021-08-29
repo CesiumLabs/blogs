@@ -71,7 +71,13 @@ export default function Me({ redirect, username, avatarURL, id, rank, bio, twitt
                                             website: document.getElementById('website_input').value
                                         };
 
-                                        await axios({ method: 'POST', url: `/api/member/edit`, headers: newProfileData })
+                                        try {
+                                            await axios({ method: 'POST', url: `/api/member/edit`, headers: newProfileData });
+                                        } catch (e) {
+                                            console.log(e);
+                                            alert("Failed updating profile. Try to check browser console for error.");
+                                        }
+                                        
                                         setState({ ...state, ...newProfileData, openEdit: false });
                                     }} className="mt-2 cursor-pointer block rounded-sm text-white px-2 py-1 bg-red-500 w-full md:w-1/4 text-center">Edit</a>
                                 </div>
