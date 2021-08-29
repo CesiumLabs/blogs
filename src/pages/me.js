@@ -7,6 +7,11 @@ import getAuthInfo from "../middleware/getAuthInfo";
 import { User } from "../utils/schemas";
 
 export default function Me({ redirect, username, avatarURL, id, rank, bio, twitter, github, website }) {
+    if (redirect) {
+        useEffect(() => window.location.href = '/api/panel/login', []);
+        return null;
+    }
+
     const [state, setState] = useState({ bio, twitter, github, website, openEdit: false });
 
     useEffect(() => {
@@ -17,10 +22,6 @@ export default function Me({ redirect, username, avatarURL, id, rank, bio, twitt
             document.getElementById('website_input').value = state.website;
         }
     }, [state.openEdit]);
-
-    useEffect(() => {
-        if (redirect) window.location.href = '/api/panel/login';
-    }, []);
 
     return (
         <Frame title={username} description={state.bio || `The profile of ${username}.`}>

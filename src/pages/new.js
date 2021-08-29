@@ -1,9 +1,15 @@
+import { useEffect } from "react";
 import axios from "axios";
 import Frame from "../components/frame";
 import Input from "../components/input";
 import { getAuthID } from '../utils';
 
-export default function New() {
+export default function New({ redirect }) {
+    if (redirect) {
+        useEffect(() => window.location.href = '/api/panel/login');
+        return null;
+    }
+
     return (
         <Frame title="New" description="Add new blog.">
             <div className="p-4 md:p-10">
@@ -52,10 +58,6 @@ export default function New() {
 }
 
 New.getInitialProps = async (ctx) => {
-    if (!getAuthID(ctx.req)) {
-        ctx.res.writeHead(302, { Location: '/api/panel/login' });
-        return {};
-    }
-
+    if (!getAuthID(ctx.req)) return { redirect: true };
     return { success: true };
 }
