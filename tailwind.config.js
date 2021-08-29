@@ -262,6 +262,7 @@ module.exports = {
             auto: "auto",
             ...theme("spacing"),
             full: "100%",
+            300: '300px',
             screen: "100vh"
         }),
         inset: {
@@ -297,7 +298,8 @@ module.exports = {
         }),
         maxHeight: {
             full: "100%",
-            screen: "100vh"
+            screen: "100vh",
+            300: "300px"
         },
         maxWidth: {
             xs: "20rem",
