@@ -1,3 +1,4 @@
+import axios from "axios";
 import Frame from "../components/frame";
 import Input from "../components/input";
 import { getAuthID } from '../utils';
@@ -21,18 +22,28 @@ export default function New() {
                     <p className="opacity-75 mb-3 text-white">The main content part of the blog...</p>
                     <textarea className="mt-1 rounded-sm p-2 outline-none resize-y w-full min-h-300" id="content_input"/>
 
-                    <a className="rounded-sm px-2 py-1 bg-red-500 mt-3 block text-center text-white cursor-pointer" onClick={() => {
+                    <a className="rounded-sm px-2 py-1 bg-red-500 mt-3 block text-center text-white cursor-pointer" onClick={async () => {
                         const blog = {
                             name: document.getElementById('name_input').value,
                             description: document.getElementById('dsc_input').value,
                             tags: document.getElementById('tags_input').value.split(', '),
-                            thumbnail: document.getElementById('thumbnail_input').value
+                            thumbnail: document.getElementById('thumbnail_input').value,
+                            content: encodeURIComponent(document.getElementById('content_input').value)
                         };
 
                         if (!blog.name) return alert("No name has been provided.");
                         if (blog.description.length < 10) return alert("Description for the blog is way too short.");
                         if (blog.tags.length > 5) return alert("You have provided more than 5 tags.");
                         if (!blog.thumbnail) return alert("No thumbnail has been provided for the thumbnail.");
+                        if (!blog.content) return alert("No content has been provided.");
+
+                        try {
+                            const { data } = await axios('/api/blog/new', { method: 'PUT', headers: blog });
+                            window.location.href = `/blog/${data.id}`;
+                        } catch (e) {
+                            console.log(e);
+                            alert("Failed creating new blog. Check the browser console for error.")
+                        }
                     }}>Submit</a>
                 </div>
             </div>
