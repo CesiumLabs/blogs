@@ -1,3 +1,4 @@
+import { useState } from "react";
 import axios from "axios";
 import Frame from "../../../components/frame";
 import { SocialButton } from "../../../components/button";
@@ -5,6 +6,8 @@ import connectMongoose from "../../../middleware/mongodb";
 import { User } from "../../../utils/schemas";
 
 export default function Member({ notFound, username, avatar, id, rank, bio, twitter, github, website }) {
+    const [blogs, setBlogs] = useState(null);
+
     if (notFound)
         return (
             <Frame title="404" description={`No staff found with id ${id}!`}>
@@ -27,13 +30,10 @@ export default function Member({ notFound, username, avatar, id, rank, bio, twit
                             <h2 className="text-white font-bold text-5xl">{username}</h2>
                             <p className="opacity-75 text-white block mb-2 -mt-2">{bio || "No description has been set!"}</p>
                             <div className="-ml-2">
-                                {true ? <i className="fas fa-tools text-red-500 text-xl ml-2" /> : null}
+                                {[1, 3].includes(rank) ? <i className="fas fa-tools text-red-500 text-xl ml-2" /> : null}
                                 {rank == 2 ? <i className="fas fa-code text-blurple-200 text-xl ml-2" /> : null}
                             </div>
                             <div className="-ml-1 mt-2">
-                                <SocialButton href={`/member/${id}/blogs`} svg="fas fa-book" color="bg-orange-500">
-                                    BLOGS
-                                </SocialButton>
                                 {twitter ? (
                                     <SocialButton href={`https://twitter.com/${twitter}`} svg="fab fa-twitter" color="bg-twitter">
                                         TWITTER
@@ -51,6 +51,16 @@ export default function Member({ notFound, username, avatar, id, rank, bio, twit
                                 ) : null}
                             </div>
                         </div>
+                    </div>
+
+                    <div className="mt-5 p-2">
+                        <h1 className="text-5xl text-white font-bold mb-1">{username}'s Blogs</h1>
+
+                        {blogs ? (
+                            null
+                        ) : <div className="-ml-1">
+                            <SocialButton svg="fas fa-book" color="bg-orange-500">View {username}'s Blogs</SocialButton>
+                        </div>}
                     </div>
                 </div>
             </div>

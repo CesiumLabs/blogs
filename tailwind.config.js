@@ -242,6 +242,7 @@ module.exports = {
             base: "1rem",
             lg: "1.125rem",
             xl: "1.25rem",
+            "3xl": "30px",
             "8xl": "50px",
             "5xl": "35px",
             "10xl": "100px",
