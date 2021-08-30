@@ -28,7 +28,7 @@ export default function New({ redirect }) {
                     <p className="opacity-75 mb-3 text-white">The main content part of the blog...</p>
                     <textarea className="mt-1 rounded-sm p-2 outline-none resize-y w-full min-h-300" id="content_input"/>
 
-                    <a className="rounded-sm px-2 py-1 bg-red-500 mt-3 block text-center text-white cursor-pointer" onClick={async () => {
+                    <a className="rounded-sm px-2 py-1 bg-teal-600 hover:bg-teal-500 mt-3 block text-center text-white cursor-pointer uppercase font-bold" onClick={async () => {
                         const blog = {
                             name: document.getElementById('name_input').value,
                             description: document.getElementById('dsc_input').value,

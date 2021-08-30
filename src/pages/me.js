@@ -54,6 +54,7 @@ export default function Me({ redirect, username, avatarURL, id, rank, bio, twitt
                                         WEBSITE
                                     </SocialButton>
                                 ) : null}
+                                <SocialButton href="/new" svg="fas fa-plus" color="bg-teal-500">NEW</SocialButton>
                             </div>
 
                             {state.openEdit ? (

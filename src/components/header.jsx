@@ -1,3 +1,4 @@
+import cookie from "cookie";
 import { useState } from "react";
 
 export default function Header() {
