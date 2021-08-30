@@ -13,7 +13,7 @@ export default function Header() {
                         <img className="w-12" src="https://snowflakedev.org/images/logotrans.png" alt="Snowflake logo" draggable="false" />
                     </a>
 
-                    <h2 className="font-bold ml-2 mt-2.5 font-changa text-xl hidden sm:block">Snowflake Blog</h2>
+                    <a href="/" className="font-bold ml-2 mt-2.5 font-changa text-xl hidden sm:block cursor-pointer">Snowflake Blog</a>
                 </div>
 
                 <div className={`lg:mt-3 lg:ml-1 -ml-1 w-full lg:w-auto bg-theme-100 p-3 lg:p-0 ${isOpen ? '' : 'hidden'} lg:block`}>
