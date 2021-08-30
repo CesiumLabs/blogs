@@ -18,6 +18,7 @@ export default function Header() {
 
                 <div className={`lg:mt-3 lg:ml-1 -ml-1 w-full lg:w-auto bg-theme-100 p-3 lg:p-0 ${isOpen ? '' : 'hidden'} lg:block`}>
                     <NavbarLink name="Profile" href="/me"/>
+                    <NavbarLink name="Settings" href="/settings"/>
                 </div>
             </div>
         </div>
