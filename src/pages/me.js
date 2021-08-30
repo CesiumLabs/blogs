@@ -17,10 +17,10 @@ export default function Me({ redirect, username, avatarURL, id, rank, bio, twitt
 
     useEffect(() => {
         if (state.openEdit) {
-            document.getElementById('bio_input').value = state.bio;
-            document.getElementById('twitter_input').value = state.twitter;
-            document.getElementById('gh_input').value = state.github;
-            document.getElementById('website_input').value = state.website;
+            document.getElementById('bio_input').value = state.bio || '';
+            document.getElementById('twitter_input').value = state.twitter || '';
+            document.getElementById('gh_input').value = state.github || '';
+            document.getElementById('website_input').value = state.website || '';
         }
     }, [state.openEdit]);
 
@@ -30,7 +30,7 @@ export default function Me({ redirect, username, avatarURL, id, rank, bio, twitt
                 <div className="bg-theme-100 rounded-lg" style={{ padding: "1rem" }}>
                     <div className="md:flex md:flex-nowrap">
                         <img className="md:w-300 md:h-300 rounded-full block border-4 border-blurple-default" src={`${avatarURL}?size=2048`} draggable="false" alt={username} />
-                        <div className="md:mt-4 md:ml-4 text-center md:text-left">
+                        <div className="md:mt-4 md:ml-4 text-center md:text-left w-full">
                             <h2 className="text-white font-bold text-5xl">{username}</h2>
                             <p className="opacity-75 text-white block mb-2 -mt-2">{state.bio || "No description has been set!"}</p>
                             <div className="-ml-2">
@@ -59,7 +59,7 @@ export default function Me({ redirect, username, avatarURL, id, rank, bio, twitt
 
                             {state.openEdit ? (
                                 <div className="mt-3 mb-2">
-                                    <h2 className="text-white text-lg font-bold -mb-1">Edit Profile</h2>
+                                    <h2 className="text-white text-xl md:text-lg font-bold -mb-1">Edit Profile</h2>
                                     <EditInput name="Bio" id="bio_input" placeholder="Your profile bio here..."/>
                                     <EditInput name="Twitter" id="twitter_input" placeholder="Your twitter username here..."/>
                                     <EditInput name="Github" id="gh_input" placeholder="Your github username here..."/>
