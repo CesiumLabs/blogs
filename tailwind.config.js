@@ -5,6 +5,7 @@ module.exports = {
         screens: {
             sm: "640px",
             md: "768px",
+            "2xmd": "1400px",
             lg: "1024px",
             xl: "1280px"
         },
@@ -18,7 +19,8 @@ module.exports = {
                 200: "#4e6791"
             },
             theme: {
-                100: "#1f2937"
+                100: "#1f2937",
+                200: "#18181d"
             },
             grey: {
                 100: "#f7fafc",
@@ -242,6 +244,7 @@ module.exports = {
             base: "1rem",
             lg: "1.125rem",
             xl: "1.25rem",
+            "2xl": "26px",
             "3xl": "30px",
             "8xl": "50px",
             "5xl": "35px",
@@ -279,6 +282,7 @@ module.exports = {
             widest: "0.1em"
         },
         lineHeight: {
+            less: ".8",
             none: "1",
             tight: "1.25",
             snug: "1.375",
@@ -304,6 +308,8 @@ module.exports = {
             300: "300px"
         },
         maxWidth: {
+            "lg-card": "calc(25% - 3rem)",
+            "md-card": "calc(33.33% - 2.25rem)",
             xs: "20rem",
             sm: "24rem",
             md: "28rem",
@@ -314,6 +320,10 @@ module.exports = {
             "4xl": "56rem",
             "5xl": "64rem",
             "6xl": "72rem",
+            "1/5": "20%",
+            "1/4": "25%",
+            "1/3": "33%",
+            "1/2": "50%",
             full: "100%"
         },
         minHeight: {
@@ -343,6 +353,7 @@ module.exports = {
             25: "0.25",
             50: "0.5",
             75: "0.75",
+            80: "0.8",
             100: "1"
         },
         order: {
@@ -370,6 +381,7 @@ module.exports = {
         width: (theme) => ({
             auto: "auto",
             ...theme("spacing"),
+            150: "150px",
             300: "300px",
             "1/2": "50%",
             "1/3": "33.333333%",

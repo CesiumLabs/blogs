@@ -1,4 +1,5 @@
 import cookie from "cookie";
+import mongoose from "mongoose";
 
 export function getAuthID(req) {
     return cookie.parse(req.headers.cookie || "").auth_id;
@@ -17,8 +18,8 @@ export function createSimplifiedJSONBlog(doc) {
         description: doc.description,
         thumbnail: doc.thumbnail,
         tags: doc.tags,
-        updatedAt: doc.updatedAt,
-        author: doc.author
+        createdAt: Date.parse(doc.createdAt),
+        author: mongoose.staffs.get(doc.author)
     }
 }
 
@@ -30,3 +31,5 @@ export const defaultCookieOptions = {
     path: "/",
     port: 3000
 };
+
+export const staffs = new Map();

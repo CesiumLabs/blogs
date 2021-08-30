@@ -1,3 +1,4 @@
+import mongoose from "mongoose";
 import cookie from "cookie";
 import { useEffect } from "react";
 import axios from "axios";
@@ -20,18 +21,15 @@ Callback.getInitialProps = async (ctx) => {
     if (!ctx.query.code || getAuthID(ctx.req)?.length) return { redirect: true };
 
     try {
-        const { data } = await axios.get("https://backend.snowflakedev.org/api/authorize", {
+        const { data } = await axios.get("https://backend.snowflakedev.cf/api/authorize", {
             headers: { redirect_uri: `${process.env.URL}/authorize/callback` },
             params: { code: ctx.query.code }
         });
 
-        const { data: staffs } = await axios.get("https://api.snowflakedev.org/api/d/staffs");
-        const staff = staffs.data.find((x) => x.id === data.data.id);
-        if (!staff) return { forbidden: true };
-
-        ctx.res.setHeader("Set-Cookie", [cookie.serialize("auth_id", data.data.accessToken, defaultCookieOptions)]);
         await connectMongoose();
-
+        const staff = mongoose.staffs.get(data.data.id);
+        if (!staff) return { forbidden: true };
+        ctx.res.setHeader("Set-Cookie", [cookie.serialize("auth_id", data.data.accessToken, defaultCookieOptions)]);
         const user = await User.findOne({ id: data.data.id });
         if (!user) await new User({ id: data.data.id, rank: getRank(staff.admin, staff.dev) }).save();
 

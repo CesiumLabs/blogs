@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import Frame from "../components/frame";
+import BlogCard from "../components/blogcard";
 import { SocialButton } from "../components/button";
 import connectMongoose from "../middleware/mongodb";
 import getAuthInfo from "../middleware/getAuthInfo";
@@ -12,7 +13,7 @@ export default function Me({ redirect, username, avatarURL, id, rank, bio, twitt
         return null;
     }
 
-    const [state, setState] = useState({ bio, twitter, github, website, openEdit: false });
+    const [state, setState] = useState({ bio, twitter, github, website, openEdit: false, blogs: null });
 
     useEffect(() => {
         if (state.openEdit) {
@@ -37,7 +38,6 @@ export default function Me({ redirect, username, avatarURL, id, rank, bio, twitt
                                 {rank == 2 ? <i className="fas fa-code text-blurple-200 text-xl ml-2" /> : null}
                             </div>
                             <div className="-ml-1 mt-2">
-                                <SocialButton href={`/member/${id}/blogs`} svg="fas fa-book" color="bg-orange-500">BLOGS</SocialButton>
                                 <SocialButton onClick={() => setState({ ...state, openEdit: !state.openEdit })} svg="fa fa-edit" color="bg-red-500">EDIT</SocialButton>
                                 {state.twitter ? (
                                     <SocialButton href={`https://twitter.com/${state.twitter}`} svg="fab fa-twitter" color="bg-twitter">
@@ -84,6 +84,23 @@ export default function Me({ redirect, username, avatarURL, id, rank, bio, twitt
                                 </div>
                             ) : null}
                         </div>
+                    </div>
+
+                    <div className="mt-5 p-2">
+                        <h1 className="text-5xl text-white font-bold mb-1">Your Blogs</h1>
+
+                        {state.blogs ? (
+                            state.blogs.length ? (
+                                <div className="md:flex md:flex-wrap -ml-3 w-full">
+                                    {state.blogs.sort((a, b) => b.updatedAt - a.updatedAt).map(x => <BlogCard textColor="white" bgColor="theme-200" blog={x}/>)}
+                                </div>
+                            ) : <p className="text-white opacity-75 mt-1 block">Seems like you have not created even one blog...</p>
+                        ) : <div className="-ml-1">
+                            <SocialButton svg="fas fa-book" color="bg-orange-500" onClick={async () => {
+                                const { data } = await axios.get(`/api/member/${id}/blogs`);
+                                setState({ ...state, blogs: data });
+                            }}>View your blogs</SocialButton>
+                        </div>}
                     </div>
                 </div>
             </div>

@@ -1,6 +1,8 @@
+import mongoose from "mongoose";
 import { useState } from "react";
 import axios from "axios";
 import Frame from "../../../components/frame";
+import BlogCard from "../../../components/blogcard";
 import { SocialButton } from "../../../components/button";
 import connectMongoose from "../../../middleware/mongodb";
 import { User } from "../../../utils/schemas";
@@ -57,12 +59,16 @@ export default function Member({ notFound, username, avatar, id, rank, bio, twit
                         <h1 className="text-5xl text-white font-bold mb-1">{username}'s Blogs</h1>
 
                         {blogs ? (
-                            null
+                            blogs.length ? (
+                                <div className="md:flex md:flex-wrap -ml-3 w-full">
+                                    {blogs.sort((a, b) => b.updatedAt - a.updatedAt).map(x => <BlogCard textColor="white" bgColor="theme-200" blog={x}/>)}
+                                </div>
+                            ) : <p className="text-white opacity-75 mt-1 block">Seems like {username} has not created even one blog...</p>
                         ) : <div className="-ml-1">
                             <SocialButton svg="fas fa-book" color="bg-orange-500" onClick={async () => {
                                 const { data } = await axios.get(`/api/member/${id}/blogs`);
-                                console.log(data);
-                            }}>View {username}'s Blogs</SocialButton>
+                                setBlogs(data);
+                            }}>View {username}'s blogs</SocialButton>
                         </div>}
                     </div>
                 </div>
@@ -72,11 +78,10 @@ export default function Member({ notFound, username, avatar, id, rank, bio, twit
 }
 
 Member.getInitialProps = async (ctx) => {
-    const { data: staffs } = await axios.get("https://api.snowflakedev.org/api/d/staffs");
-    const staff = staffs.data.find((x) => x.id === ctx.query.id);
+    await connectMongoose();
+    const staff = mongoose.staffs.get(ctx.query.id);
     if (!staff) return { notFound: "is not a staff!", id: ctx.query.id };
 
-    await connectMongoose();
     let user = await User.findOne({ id: ctx.query.id });
     if (!user) return { notFound: "has never accessed the site to show the profile!", id: ctx.query.id };
 
