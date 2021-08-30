@@ -26,7 +26,7 @@ export default function Member({ notFound, username, avatar, id, rank, bio, twit
         <Frame title={username} description={bio || `The profile of ${username}.`}>
             <div className="p-4 md:p-10">
                 <div className="bg-theme-100 rounded-lg" style={{ padding: "1rem" }}>
-                    <div className="md:flex flex-wrap">
+                    <div className="md:flex md:flex-nowrap">
                         <img className="md:w-300 rounded-full block border-4 border-blurple-default" src={`${avatar}`} draggable="false" alt={username} />
                         <div className="md:mt-4 md:ml-4 text-center md:text-left">
                             <h2 className="text-white font-bold text-5xl">{username}</h2>
