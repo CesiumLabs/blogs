@@ -3,7 +3,6 @@ import moment from "moment";
 export default function BlogCard({ blog, textColor = "black", bgColor = "white" }) {
     // Kindly remove the below code once development is over...
     blog.thumbnail = "https://snowflakedev.org/images/logo.png";
-    console.log(blog.author)
 
     return <div className={`text-${textColor} mt-3 ml-3 font-changa md:max-w-md-card lg:max-w-lg-card w-full`}>
         <img className="block rounded-t-sm w-full" src={blog.thumbnail} alt={blog.name}/>
