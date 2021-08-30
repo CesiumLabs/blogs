@@ -4,7 +4,7 @@ import { getAuthInfoAPI } from "../../../middleware/getAuthInfo";
 const headerKeys = ["bio", "twitter", "github", "website"];
 
 export default async (req, res) => {
-    if (req.method == "POST" && req.headers.origin == process.env.URL) {
+    if (req.method == "POST" && req.headers.host == process.env.HOST) {
         const discordUser = await getAuthInfoAPI(req);
         if (!discordUser) return res.status(403).end();
 

@@ -10,6 +10,18 @@ export function getRank(isAdmin, isDev) {
     else return 3;
 }
 
+export function createSimplifiedJSONBlog(doc) {
+    return {
+        id: doc.id,
+        name: doc.name,
+        description: doc.description,
+        thumbnail: doc.thumbnail,
+        tags: doc.tags,
+        updatedAt: doc.updatedAt,
+        author: doc.author
+    }
+}
+
 export const defaultCookieOptions = {
     httpOnly: true,
     secure: true,

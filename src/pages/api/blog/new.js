@@ -3,7 +3,7 @@ import { Blog } from "../../../utils/schemas";
 import { getAuthInfoAPI } from "../../../middleware/getAuthInfo";
 
 export default async (req, res) => {
-    if (req.method == "PUT" && req.headers.origin == process.env.URL) {
+    if (req.method == "PUT" && req.headers.host == process.env.HOST) {
         const discordUser = await getAuthInfoAPI(req);
         if (!discordUser) return res.status(403).end();
         

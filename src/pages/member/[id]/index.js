@@ -59,7 +59,10 @@ export default function Member({ notFound, username, avatar, id, rank, bio, twit
                         {blogs ? (
                             null
                         ) : <div className="-ml-1">
-                            <SocialButton svg="fas fa-book" color="bg-orange-500">View {username}'s Blogs</SocialButton>
+                            <SocialButton svg="fas fa-book" color="bg-orange-500" onClick={async () => {
+                                const { data } = await axios.get(`/api/member/${id}/blogs`);
+                                console.log(data);
+                            }}>View {username}'s Blogs</SocialButton>
                         </div>}
                     </div>
                 </div>
