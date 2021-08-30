@@ -294,6 +294,7 @@ module.exports = {
         margin: (theme, { negative }) => ({
             auto: "auto",
             2.5: "0.55rem",
+            2.8: "0.6rem",
             ...theme("spacing"),
             ...negative(theme("spacing"))
         }),
