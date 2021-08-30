@@ -14,7 +14,7 @@ export default async (req, res) => {
         }
 
         res.status(200).json(cached);
-    } else res.status(400).json({});
+    } else res.status(403).json({});
 }
 
 function shuffle(array) {

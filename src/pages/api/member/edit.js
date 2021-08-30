@@ -13,5 +13,5 @@ export default async (req, res) => {
 
         await User.findOneAndUpdate({ id: discordUser.id }, newUser);
         res.status(204).end();
-    } else res.status(404).json({});
+    } else res.status(403).json({});
 };

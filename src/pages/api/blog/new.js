@@ -18,5 +18,5 @@ export default async (req, res) => {
         }).save();
 
         res.status(200).json({ id: blog.id });
-    } else res.status(404).json({});
+    } else res.status(403).json({});
 };
