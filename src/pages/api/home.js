@@ -5,12 +5,12 @@ let cached;
 
 export default async (req, res) => {
     if (req.method == "GET") {
-        if (cached && (Date.now() - cached.createdAt) > 300000) res.status(200).json(cacged)
+        if (cached && (Date.now() - cached.createdAt) > 300000) res.status(200).json(cached)
         const blogs = (await Blog.find()).map(createSimplifiedJSONBlog);
         cached = {
             createdAt: Date.now(),
-            recents: blogs.sort((a, b) => b.updatedAt - a.updatedAt),
-            randoms: shuffle(blogs)
+            recents: blogs.sort((a, b) => b.updatedAt - a.updatedAt).slice(0, 10),
+            randoms: shuffle(blogs).slice(0, 8)
         }
 
         res.status(200).json(cached);

@@ -4,7 +4,7 @@ export default function BlogCard({ blog, textColor = "black", bgColor = "white" 
     // Kindly remove the below code once development is over...
     blog.thumbnail = "https://snowflakedev.org/images/logo.png";
 
-    return <div className={`text-${textColor} mt-3 ml-3 font-changa md:max-w-md-card lg:max-w-lg-card w-full shadow-lg`}>
+    return <div className={`text-${textColor} mt-3 ml-3 font-changa md:max-w-md-card lg:max-w-lg-card w-full shadow-2md`}>
         <img className="block rounded-t-sm w-full" src={blog.thumbnail} alt={blog.name}/>
         <div className={`bg-${bgColor} rounded-b-sm p-3`}>
             <div className="-ml-2 pl-2">
