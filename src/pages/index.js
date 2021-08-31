@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useState, useEffect, useRef } from "react";
 import axios from "axios";
 import connectMongoose from "../middleware/mongodb";
 import parseSearch from "../utils/searchParser";
@@ -6,6 +6,16 @@ import Frame from "../components/frame";
 import BlogCard from "../components/blogcard";
 
 export default function Home({ recents, randoms }) {
+    useEffect(async () => {
+        const query = new URLSearchParams(window.location.search);
+        if (query.has('tag')) {
+            const tag = query.get('tag');
+            const { data } = await axios.get("/api/search", { params: { tag } });
+            setContent(<SearchContent data={data}/>);
+            searchElement.current.value = `tag:${tag}`;
+        }
+    }, []);
+
     const searchElement = useRef(null);
     const [content, setContent] = useState(
         <div className="p-8">
