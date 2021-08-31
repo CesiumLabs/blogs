@@ -7,13 +7,13 @@ import connectMongoose from "../middleware/mongodb";
 import getAuthInfo from "../middleware/getAuthInfo";
 import { User } from "../utils/schemas";
 
-export default function Me({ redirect, username, avatarURL, id, rank, bio, twitter, github, website }) {
+export default function Me({ redirect, username, avatarURL, id, rank, bio, twitter, github, website, banner }) {
     if (redirect) {
         useEffect(() => window.location.href = '/api/panel/login', []);
         return null;
     }
 
-    const [state, setState] = useState({ bio, twitter, github, website, openEdit: false, blogs: null });
+    const [state, setState] = useState({ bio, twitter, github, website, banner, openEdit: false, blogs: null });
 
     useEffect(() => {
         if (state.openEdit) {
@@ -21,15 +21,23 @@ export default function Me({ redirect, username, avatarURL, id, rank, bio, twitt
             document.getElementById('twitter_input').value = state.twitter || '';
             document.getElementById('gh_input').value = state.github || '';
             document.getElementById('website_input').value = state.website || '';
+            document.getElementById('banner_input').value = state.banner || '';
         }
     }, [state.openEdit]);
 
     return (
         <Frame title={username} description={state.bio || `The profile of ${username}.`}>
             <div className="p-4 md:p-10">
-                <div className="bg-theme-100 rounded-lg" style={{ padding: "1rem" }}>
+                <div className="shadow-2md rounded-lg p-4 md:p-8" style={{
+                    backgroundImage: state.banner ? `url(${state.banner})` : null,
+                    backgroundRepeat: 'no-repeat',
+                    backgroundSize: 'cover',
+                    backgroundBlendMode: 'multiply',
+                    backgroundColor: '#303045',
+                    backgroundAttachment: 'fixed'
+                }}>
                     <div className="md:flex md:flex-nowrap">
-                        <img className="md:w-300 md:h-300 rounded-full block border-4 border-blurple-default" src={`${avatarURL}?size=2048`} draggable="false" alt={username} />
+                        <img className="md:w-300 md:h-300 rounded-full block border-4 border-blurple-default shadow-2md" src={`${avatarURL}?size=2048`} draggable="false" alt={username} />
                         <div className="md:mt-4 md:ml-4 text-center md:text-left w-full">
                             <h2 className="text-white font-bold text-5xl">{username}</h2>
                             <p className="opacity-75 text-white block mb-2 -mt-2">{state.bio || "No description has been set!"}</p>
@@ -64,13 +72,15 @@ export default function Me({ redirect, username, avatarURL, id, rank, bio, twitt
                                     <EditInput name="Twitter" id="twitter_input" placeholder="Your twitter username here..."/>
                                     <EditInput name="Github" id="gh_input" placeholder="Your github username here..."/>
                                     <EditInput name="Website" id="website_input" placeholder="Your website url here..."/>
+                                    <EditInput name="Banner" id="banner_input" placeholder="Your profile banner url here..."/>
 
                                     <a onClick={async () => {
                                         const newProfileData = {
                                             bio: document.getElementById('bio_input').value,
                                             twitter: document.getElementById('twitter_input').value,
                                             github: document.getElementById('gh_input').value,
-                                            website: document.getElementById('website_input').value
+                                            website: document.getElementById('website_input').value,
+                                            banner: document.getElementById('banner_input').value
                                         };
 
                                         try {
@@ -97,7 +107,7 @@ export default function Me({ redirect, username, avatarURL, id, rank, bio, twitt
                                 </div>
                             ) : <p className="text-white opacity-75 mt-1 block">Seems like you have not created even one blog...</p>
                         ) : <div className="-ml-1">
-                            <SocialButton svg="fas fa-book" color="bg-orange-500" onClick={async () => {
+                            <SocialButton svg="shadow-2md fas fa-book" color="bg-orange-500" onClick={async () => {
                                 const { data } = await axios.get(`/api/member/${id}/blogs`);
                                 setState({ ...state, blogs: data });
                             }}>View your blogs</SocialButton>
@@ -118,8 +128,8 @@ Me.getInitialProps = async (ctx) => {
     if (!user) return { redirect: true };
 
     return {
-        ...user.toJSON(),
-        ...discordUser
+        ...discordUser,
+        ...user.toJSON()
     };
 };
 

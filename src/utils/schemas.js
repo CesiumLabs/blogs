@@ -48,6 +48,7 @@ const user = new Schema({
         type: Number,
         required: true
     }, // 1 means admin, 2 means developer and 3 means moderator staff
+    banner: String,
     github: String,
     twitter: String,
     website: String,

@@ -1,7 +1,7 @@
 import { User } from "../../../utils/schemas";
 import { getAuthInfoAPI } from "../../../middleware/getAuthInfo";
 
-const headerKeys = ["bio", "twitter", "github", "website"];
+const headerKeys = ["bio", "twitter", "github", "website", "banner"];
 
 export default async (req, res) => {
     if (req.method == "POST" && req.headers.host == process.env.HOST) {

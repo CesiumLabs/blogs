@@ -18,7 +18,7 @@ export default function Callback({ redirect, forbidden, error }) {
 }
 
 Callback.getInitialProps = async (ctx) => {
-    if (!ctx.query.code || getAuthID(ctx.req)?.length) return { redirect: true };
+    if (!ctx.query.code) return { redirect: true };
 
     try {
         const { data } = await axios.get("https://backend.snowflakedev.cf/api/authorize", {
@@ -31,7 +31,7 @@ Callback.getInitialProps = async (ctx) => {
         if (!staff) return { forbidden: true };
         ctx.res.setHeader("Set-Cookie", [cookie.serialize("auth_id", data.data.accessToken, defaultCookieOptions)]);
         const user = await User.findOne({ id: data.data.id });
-        if (!user) await new User({ id: data.data.id, rank: getRank(staff.admin, staff.dev) }).save();
+        if (!user) await (new User({ id: data.data.id, rank: getRank(staff.admin, staff.dev) })).save();
 
         return { redirect: true };
     } catch (e) {

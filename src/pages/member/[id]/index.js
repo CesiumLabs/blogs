@@ -7,7 +7,7 @@ import { SocialButton } from "../../../components/button";
 import connectMongoose from "../../../middleware/mongodb";
 import { User } from "../../../utils/schemas";
 
-export default function Member({ notFound, username, avatar, id, rank, bio, twitter, github, website }) {
+export default function Member({ notFound, username, avatar, id, rank, bio, twitter, github, website, banner }) {
     const [blogs, setBlogs] = useState(null);
 
     if (notFound)
@@ -25,9 +25,16 @@ export default function Member({ notFound, username, avatar, id, rank, bio, twit
     return (
         <Frame title={username} description={bio || `The profile of ${username}.`}>
             <div className="p-4 md:p-10">
-                <div className="bg-theme-100 rounded-lg" style={{ padding: "1rem" }}>
+                <div className="shadow-2md rounded-lg p-4 md:p-8" style={{
+                    backgroundImage: banner ? `url(${banner})` : null,
+                    backgroundRepeat: 'no-repeat',
+                    backgroundSize: 'cover',
+                    backgroundBlendMode: 'multiply',
+                    backgroundColor: '#303045',
+                    backgroundAttachment: 'fixed'
+                }}>
                     <div className="md:flex md:flex-nowrap">
-                        <img className="md:w-300 rounded-full block border-4 border-blurple-default" src={`${avatar}`} draggable="false" alt={username} />
+                        <img className="md:w-300 rounded-full block border-4 border-blurple-default shadow-2md" src={`${avatar}`} draggable="false" alt={username} />
                         <div className="md:mt-4 md:ml-4 text-center md:text-left">
                             <h2 className="text-white font-bold text-5xl">{username}</h2>
                             <p className="opacity-75 text-white block mb-2 -mt-2">{bio || "No description has been set!"}</p>
@@ -86,7 +93,7 @@ Member.getInitialProps = async (ctx) => {
     if (!user) return { notFound: "has never accessed the site to show the profile!", id: ctx.query.id };
 
     return {
-        ...user.toJSON(),
-        ...staff
+        ...staff,
+        ...user.toJSON()
     };
 };
