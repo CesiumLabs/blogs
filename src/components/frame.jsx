@@ -6,7 +6,6 @@ export default function Frame({ title, description = "A blog written by the snow
 
     return (
         <>
-            <Header />
             <Head>
                 <title>{title}</title>
                 <meta name="description" content={description} />
@@ -33,7 +32,14 @@ export default function Frame({ title, description = "A blog written by the snow
                 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.1/css/all.css" />
             </Head>
 
-            {children}
+            <div className="min-h-screen">
+                <Header/>
+                {children}
+            </div>
+            
+            <div className="text-full text-white bg-theme-100 w-full font-changa text-center text-lg py-4 mt-4">
+                <p>Snowflake Development © 2021</p>
+            </div>
         </>
     );
 }

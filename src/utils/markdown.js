@@ -13,21 +13,21 @@ marked.use({
             return local ? html : html.replace(/^<a /, '<a target="_blank" rel="noreferrer" class="text-blurple-500 hover:text-blurple-600"');
         },
         code: (src) => {
-            return `<pre class="my-0 break-words overflow-x-auto bg-gray-50 dark:bg-gray-900 p-5"><code class="yukitoki-code">${highlight.highlight(src, { language: "js" }).value}</code></pre>`;
+            return `<pre class="my-0 text-white break-words overflow-x-auto bg-grey-900 p-5 rounded-lg"><code>${highlight.highlight(src, { language: "js" }).value}</code></pre>`;
         },
         image: (href, title, text) => {
             const html = renderer.image.call(renderer, href, title, text);
-            return html.replace(/^<img /, '<img class="inline-flex"');
+            return html.replace(/^<img /, '<img class="inline-flex rounded-sm"');
         },
         heading: (text, level) => {
             const levels = ["4xl", "3xl", "2xl", "xl", "lg", "md"];
             return stripIndents(`
-                <h${level} id="${slugger.slug(text)}" class="text-${levels[level]}">${text}</h${level}>
+                <h${level} id="${slugger.slug(text)}" class="font-bold text-${levels[level]}">${text}</h${level}>
             `);
         }
     }
 });
 
 export default function markdown(input) {
-    return `<div class="space-y-2 space-x-2">${marked(input || "").replace(/<(info|warn)>([\s\S]+)<\/\1>/gi, '<div class="$1">$2</div>')}</div>`;
+    return `<div class="space-y-2 space-x-2">${marked(input || "")}</div>`;
 }
