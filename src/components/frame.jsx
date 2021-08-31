@@ -33,10 +33,10 @@ export default function Frame({ title, description = "A blog written by the snow
             </Head>
 
             <div className="min-h-screen">
-                <Header/>
+                <Header />
                 {children}
             </div>
-            
+
             <div className="text-full text-white bg-theme-100 w-full font-changa text-center text-lg py-4 mt-4">
                 <p>Snowflake Development © 2021</p>
             </div>

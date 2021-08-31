@@ -16,7 +16,9 @@ export default function Member({ notFound, username, avatar, id, rank, bio, twit
                 <div className="p-4 md:p-10">
                     <div className="bg-theme-100 rounded-lg text-center text-white py-10">
                         <h1 className="font-bold text-8xl md:text-10xl">404</h1>
-                        <p className="opacity-75 text-lg -mt-2">User {id} {notFound}</p>
+                        <p className="opacity-75 text-lg -mt-2">
+                            User {id} {notFound}
+                        </p>
                     </div>
                 </div>
             </Frame>
@@ -25,14 +27,17 @@ export default function Member({ notFound, username, avatar, id, rank, bio, twit
     return (
         <Frame title={username} description={bio || `The profile of ${username}.`}>
             <div className="p-4 md:p-10">
-                <div className="shadow-2md rounded-lg p-4 md:p-8" style={{
-                    backgroundImage: banner ? `url(${banner})` : null,
-                    backgroundRepeat: 'no-repeat',
-                    backgroundSize: 'cover',
-                    backgroundBlendMode: 'multiply',
-                    backgroundColor: '#303045',
-                    backgroundAttachment: 'fixed'
-                }}>
+                <div
+                    className="shadow-2md rounded-lg p-4 md:p-8"
+                    style={{
+                        backgroundImage: banner ? `url(${banner})` : null,
+                        backgroundRepeat: "no-repeat",
+                        backgroundSize: "cover",
+                        backgroundBlendMode: "multiply",
+                        backgroundColor: "#303045",
+                        backgroundAttachment: "fixed"
+                    }}
+                >
                     <div className="text-center">
                         <img className="md:w-300 md:h-300 rounded-full inline-block border-4 border-blurple-default shadow-2md" src={avatar} draggable="false" alt={username} />
                         <div className="md:mt-4 w-full">
@@ -68,16 +73,29 @@ export default function Member({ notFound, username, avatar, id, rank, bio, twit
                                 <div>
                                     <h1 className="text-5xl text-white font-bold mb-1">{username}'s Blogs</h1>
                                     <div className="md:flex md:flex-wrap -ml-3 w-full">
-                                        {blogs.sort((a, b) => b.updatedAt - a.updatedAt).map(x => <BlogCard textColor="white" bgColor="theme-200" blog={x}/>)}
-                                    </div> 
+                                        {blogs
+                                            .sort((a, b) => b.updatedAt - a.updatedAt)
+                                            .map((x) => (
+                                                <BlogCard textColor="white" bgColor="theme-200" blog={x} />
+                                            ))}
+                                    </div>
                                 </div>
-                            ) : <p className="text-white opacity-75 mt-1 block">Seems like {username} has not created even one blog...</p>
-                        ) : <div className="-ml-1">
-                            <a className="font-changa text-white hover:underline cursor-pointer text-lg" onClick={async () => {
-                                const { data } = await axios.get(`/api/member/${id}/blogs`);
-                                setBlogs(data);
-                            }}>View {username}'s blogs?</a>
-                        </div>}
+                            ) : (
+                                <p className="text-white opacity-75 mt-1 block">Seems like {username} has not created even one blog...</p>
+                            )
+                        ) : (
+                            <div className="-ml-1">
+                                <a
+                                    className="font-changa text-white hover:underline cursor-pointer text-lg"
+                                    onClick={async () => {
+                                        const { data } = await axios.get(`/api/member/${id}/blogs`);
+                                        setBlogs(data);
+                                    }}
+                                >
+                                    View {username}'s blogs?
+                                </a>
+                            </div>
+                        )}
                     </div>
                 </div>
             </div>

@@ -6,4 +6,4 @@ export default async (req, res) => {
         const blogs = await Blog.find({ author: req.query.id });
         return res.status(200).json(blogs.map(createSimplifiedJSONBlog));
     } else res.status(403).json({});
-}
+};

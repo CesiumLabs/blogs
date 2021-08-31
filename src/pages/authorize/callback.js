@@ -31,7 +31,7 @@ Callback.getInitialProps = async (ctx) => {
         if (!staff) return { forbidden: true };
         ctx.res.setHeader("Set-Cookie", [cookie.serialize("auth_id", data.data.accessToken, defaultCookieOptions)]);
         const user = await User.findOne({ id: data.data.id });
-        if (!user) await (new User({ id: data.data.id, rank: getRank(staff.admin, staff.dev) })).save();
+        if (!user) await new User({ id: data.data.id, rank: getRank(staff.admin, staff.dev) }).save();
 
         return { redirect: true };
     } catch (e) {

@@ -20,7 +20,7 @@ export function createSimplifiedJSONBlog(doc) {
         tags: doc.tags,
         createdAt: Date.parse(doc.createdAt),
         author: mongoose.staffs.get(doc.author)
-    }
+    };
 }
 
 export const defaultCookieOptions = {

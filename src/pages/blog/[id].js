@@ -8,35 +8,44 @@ import Frame from "../../components/frame";
 import "highlight.js/styles/agate.css";
 
 export default function BlogPage({ name, description, thumbnail, tags, author, createdAt, updatedAt, content }) {
-    useEffect(() => window.addEventListener('load', () => document.getElementById('main_content').innerHTML = renderMarkdown(content)))
+    useEffect(() => window.addEventListener("load", () => (document.getElementById("main_content").innerHTML = renderMarkdown(content))));
 
-    return <Frame title={name} description={description} image={thumbnail}>
-        <div className="p-8 w-full">
-            <div className="shadow-2md rounded-lg">
-                <div className="p-6 rounded-t-lg w-full text-white border-1 border-grey-100 border-b-none bg-theme-100">
-                    <h1 className="text-8xl font-bold">{name}</h1>
-                    <div className="mt-1">
-                        {(tags.length ? tags : ['nil']).map((x, i) => <a className={`font-consolas text-white rounded-sm py-1 px-2 bg-teal-600 hover:bg-teal-500 uppercase font-bold ${i == 0 ? "" : "ml-2"}`} href={`/?tag=${encodeURIComponent(x)}`}>{x}</a>)}
-                    </div>
-
-                    <p className="opacity-80 block mt-2 mb-1 font-changa text-lg">{description}</p>
-
-                    {author ? (
-                        <div>
-                            <img className="w-5 rounded-full inline-block mr-2 -mt-1" src={author.avatar} alt={author.username}/>
-                            <p className="opacity-80 leading-none inline-block">
-                                <a className="font-bold hover:underline hover:opacity-100" href={`/member/${author.id}`}>{author.username}</a>・{moment(createdAt).fromNow()}・{getReadTime(content)}
-                            </p>
+    return (
+        <Frame title={name} description={description} image={thumbnail}>
+            <div className="p-8 w-full">
+                <div className="shadow-2md rounded-lg">
+                    <div className="p-6 rounded-t-lg w-full text-white border-1 border-grey-100 border-b-none bg-theme-100">
+                        <h1 className="text-8xl font-bold">{name}</h1>
+                        <div className="mt-1">
+                            {(tags.length ? tags : ["nil"]).map((x, i) => (
+                                <a className={`font-consolas text-white rounded-sm py-1 px-2 bg-teal-600 hover:bg-teal-500 uppercase font-bold ${i == 0 ? "" : "ml-2"}`} href={`/?tag=${encodeURIComponent(x)}`}>
+                                    {x}
+                                </a>
+                            ))}
                         </div>
-                    ) : null}
-                </div>
-                <div className="p-6 shadow-md rounded-b-lg bg-white w-full border-default border-grey-100">
-                    <div className="mt-2" id="main_content"/>
-                    <p className="mt-2 text-lg">Last updated {moment(updatedAt).fromNow()}...</p>
+
+                        <p className="opacity-80 block mt-2 mb-1 font-changa text-lg">{description}</p>
+
+                        {author ? (
+                            <div>
+                                <img className="w-5 rounded-full inline-block mr-2 -mt-1" src={author.avatar} alt={author.username} />
+                                <p className="opacity-80 leading-none inline-block">
+                                    <a className="font-bold hover:underline hover:opacity-100" href={`/member/${author.id}`}>
+                                        {author.username}
+                                    </a>
+                                    ・{moment(createdAt).fromNow()}・{getReadTime(content)}
+                                </p>
+                            </div>
+                        ) : null}
+                    </div>
+                    <div className="p-6 shadow-md rounded-b-lg bg-white w-full border-default border-grey-100">
+                        <div className="mt-2" id="main_content" />
+                        <p className="mt-2 text-lg">Last updated {moment(updatedAt).fromNow()}...</p>
+                    </div>
                 </div>
             </div>
-        </div>
-    </Frame>
+        </Frame>
+    );
 }
 
 BlogPage.getInitialProps = async (ctx) => {
@@ -53,15 +62,15 @@ BlogPage.getInitialProps = async (ctx) => {
         tags: blog.tags,
         id: blog.id,
         thumbnail: blog.thumbnail
-    }
-}
+    };
+};
 
 function getReadTime(content) {
-    const d = moment.duration((content.split(' ').length * .2) * 1000);
+    const d = moment.duration(content.split(" ").length * 0.2 * 1000);
     const m = Math.round(d.asMinutes());
     if (m == 0) {
         const s = Math.round(d.asSeconds());
         if (s == 0) return "Less than a second read";
-        else return `${s} seconds read`
-    } else return `${m} minutes read`
+        else return `${s} seconds read`;
+    } else return `${m} minutes read`;
 }
