@@ -13,10 +13,13 @@ export default function New({ redirect }) {
     return (
         <Frame title="New" description="Add new blog.">
             <div className="p-4 md:p-10">
-                <div className="rounded-lg p-8 bg-white shadow-2md border-default border-grey-100">
-                    <h1 className="text-black text-5xl font-bold">New Blog</h1>
-                    <p className="opacity-75 text-black">Remember to make your blog perfect, attractive and useful!</p>
+                <div className="shadow-2md rounded-lg">
+                <div className="rounded-t-lg p-8 bg-theme-100 border-default border-grey-100">
+                    <h1 className="text-white text-5xl font-bold">New Blog</h1>
+                    <p className="opacity-75 text-white">Remember to make your blog perfect, attractive and useful!</p>
+                </div>
 
+                <div className="rounded-b-lg p-8 bg-white border-default border-t-none border-grey-100">
                     <table className="text-black w-full mt-3">
                         <Input name="Name" description="The name of the blog. Required." placeholder="Awesome blog." id="name_input"/>
                         <Input name="Description" description="The short description of your blog. Required." placeholder="My awesome blog." id="dsc_input"/>
@@ -51,6 +54,7 @@ export default function New({ redirect }) {
                             alert("Failed creating new blog. Check the browser console for error.")
                         }
                     }}>Submit</a>
+                </div>
                 </div>
             </div>
         </Frame>
