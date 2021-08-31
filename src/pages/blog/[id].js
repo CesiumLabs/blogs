@@ -13,7 +13,8 @@ export default function BlogPage({ name, description, thumbnail, tags, author, c
                     {(tags.length ? tags : ['nil']).map((x, i) => <a className={`font-consolas text-white rounded-sm py-1 px-2 bg-teal-600 hover:bg-teal-500 uppercase font-bold ${i == 0 ? "" : "ml-2"}`} href={`/?tag=${encodeURIComponent(x)}`}>{x}</a>)}
                 </div>
 
-                <p className="opacity-80 block mt-1 font-changa text-lg">{description}</p>
+                <p className="opacity-80 block mt-1 mb-1 font-changa text-lg">{description}</p>
+
                 {author ? (
                     <div>
                         <img className="w-5 rounded-full inline-block mr-2 -mt-1" src={author.avatar} alt={author.username}/>
@@ -49,7 +50,7 @@ function getReadTime(content) {
     const m = Math.round(d.asMinutes());
     if (m == 0) {
         const s = Math.round(d.asSeconds());
-        if (s == 0) return "Less than a second read.";
-        else return `${s} seconds read.`
-    } else return `${m} minutes read.`
+        if (s == 0) return "Less than a second read";
+        else return `${s} seconds read`
+    } else return `${m} minutes read`
 }
