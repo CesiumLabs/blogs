@@ -5,7 +5,7 @@ export default function BlogCard({ blog, textColor = "black", bgColor = "white" 
     blog.thumbnail = "https://snowflakedev.org/images/logo.png";
 
     return <div className={`text-${textColor} mt-3 ml-3 font-changa md:max-w-md-card lg:max-w-lg-card w-full shadow-2md`}>
-        <div className="rounded-b-sm p-3 rounded-default" style={{
+        <div className="rounded-b-sm p-3 rounded-default flex flex-col justify-between" style={{
             backgroundImage: `url(${blog.thumbnail})`,
             backgroundRepeat: 'no-repeat',
             backgroundSize: 'cover',
