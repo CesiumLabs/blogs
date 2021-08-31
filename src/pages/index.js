@@ -21,15 +21,15 @@ export default function Home({ recents, randoms }) {
         <div className="p-8">
             <h1 className="text-5xl font-bold">Recently Added</h1>
             <div className="md:flex md:flex-wrap -ml-3 w-full">
-                {recents.map((x) => (
-                    <BlogCard textColor="white" bgColor="theme-200" blog={x} />
+                {recents.map((x, i) => (
+                    <BlogCard key={i} textColor="white" bgColor="theme-200" blog={x} />
                 ))}
             </div>
 
             <h1 className="text-5xl font-bold mt-8">Random Blogs</h1>
             <div className="md:flex md:flex-wrap -ml-3 w-full">
-                {randoms.map((x) => (
-                    <BlogCard textColor="white" bgColor="theme-200" blog={x} />
+                {randoms.map((x, i) => (
+                    <BlogCard key={i} textColor="white" bgColor="theme-200" blog={x} />
                 ))}
             </div>
         </div>
@@ -72,8 +72,8 @@ function SearchContent({ data }) {
         <div className="py-4 px-8">
             <p className="font-changa text-lg block mb-2">Found {data.length} search results...</p>
             <div className="md:flex md:flex-wrap -ml-3 w-full">
-                {data.map((x) => (
-                    <BlogCard textColor="white" bgColor="theme-200" blog={x} />
+                {data.map((x, i) => (
+                    <BlogCard key={i} textColor="white" bgColor="theme-200" blog={x} />
                 ))}
             </div>
         </div>

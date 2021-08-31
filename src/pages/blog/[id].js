@@ -18,7 +18,7 @@ export default function BlogPage({ name, description, thumbnail, tags, author, c
                         <h1 className="text-8xl font-bold">{name}</h1>
                         <div className="mt-1">
                             {(tags.length ? tags : ["nil"]).map((x, i) => (
-                                <a className={`font-consolas text-white rounded-sm py-1 px-2 bg-teal-600 hover:bg-teal-500 uppercase font-bold ${i == 0 ? "" : "ml-2"}`} href={`/?tag=${encodeURIComponent(x)}`}>
+                                <a key={i} className={`font-consolas text-white rounded-sm py-1 px-2 bg-teal-600 hover:bg-teal-500 uppercase font-bold ${i == 0 ? "" : "ml-2"}`} href={`/?tag=${encodeURIComponent(x)}`}>
                                     {x}
                                 </a>
                             ))}

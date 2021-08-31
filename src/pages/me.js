@@ -117,8 +117,8 @@ export default function Me({ redirect, username, avatarURL, id, rank, bio, twitt
                                     <div className="md:flex md:flex-wrap -ml-3 w-full">
                                         {state.blogs
                                             .sort((a, b) => b.updatedAt - a.updatedAt)
-                                            .map((x) => (
-                                                <BlogCard textColor="white" bgColor="theme-200" blog={x} />
+                                            .map((x, i) => (
+                                                <BlogCard key={i} textColor="white" bgColor="theme-200" blog={x} />
                                             ))}
                                     </div>
                                 </div>

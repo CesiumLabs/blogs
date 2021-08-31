@@ -75,8 +75,8 @@ export default function Member({ notFound, username, avatar, id, rank, bio, twit
                                     <div className="md:flex md:flex-wrap -ml-3 w-full">
                                         {blogs
                                             .sort((a, b) => b.updatedAt - a.updatedAt)
-                                            .map((x) => (
-                                                <BlogCard textColor="white" bgColor="theme-200" blog={x} />
+                                            .map((x, i) => (
+                                                <BlogCard key={i} textColor="white" bgColor="theme-200" blog={x} />
                                             ))}
                                     </div>
                                 </div>
