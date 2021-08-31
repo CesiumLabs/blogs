@@ -16,7 +16,6 @@
     "cookie": "^0.4.1",
     "highlight.js": "^11.2.0",
     "marked": "^3.0.2",
-    "moment": "^2.29.1",
     "mongoose": "^5.11.15",
     "next": "^11.1.0",
     "postcss": "^8.2.4",
