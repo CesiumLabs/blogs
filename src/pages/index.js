@@ -14,7 +14,7 @@ export default function Home({ recents, randoms }) {
                 {recents.map(x => <BlogCard textColor="white" bgColor="theme-200" blog={x}/>)}
             </div>
 
-            <h1 className="text-5xl font-bold mt-8">Random</h1>
+            <h1 className="text-5xl font-bold mt-8">Random Blogs</h1>
             <div className="md:flex md:flex-wrap -ml-3 w-full">
                 {randoms.map(x => <BlogCard textColor="white" bgColor="theme-200" blog={x}/>)}
             </div>
