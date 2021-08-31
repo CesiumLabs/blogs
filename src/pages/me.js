@@ -36,9 +36,9 @@ export default function Me({ redirect, username, avatarURL, id, rank, bio, twitt
                     backgroundColor: '#303045',
                     backgroundAttachment: 'fixed'
                 }}>
-                    <div className="md:flex md:flex-nowrap">
-                        <img className="md:w-300 md:h-300 rounded-full block border-4 border-blurple-default shadow-2md" src={`${avatarURL}?size=2048`} draggable="false" alt={username} />
-                        <div className="md:mt-4 md:ml-4 text-center md:text-left w-full">
+                    <div className="text-center">
+                        <img className="md:w-300 md:h-300 rounded-full inline-block border-4 border-blurple-default shadow-2md" src={`${avatarURL}?size=2048`} draggable="false" alt={username} />
+                        <div className="md:mt-4 w-full">
                             <h2 className="text-white font-bold text-5xl">{username}</h2>
                             <p className="opacity-75 text-white block mb-2 -mt-2">{state.bio || "No description has been set!"}</p>
                             <div className="-ml-2">
@@ -98,19 +98,20 @@ export default function Me({ redirect, username, avatarURL, id, rank, bio, twitt
                     </div>
 
                     <div className="mt-5 p-2">
-                        <h1 className="text-5xl text-white font-bold mb-1">Your Blogs</h1>
-
                         {state.blogs ? (
                             state.blogs.length ? (
-                                <div className="md:flex md:flex-wrap -ml-3 w-full">
-                                    {state.blogs.sort((a, b) => b.updatedAt - a.updatedAt).map(x => <BlogCard textColor="white" bgColor="theme-200" blog={x}/>)}
+                                <div>
+                                    <h1 className="text-5xl text-white font-bold mb-1">Your Blogs</h1>
+                                    <div className="md:flex md:flex-wrap -ml-3 w-full">
+                                        {state.blogs.sort((a, b) => b.updatedAt - a.updatedAt).map(x => <BlogCard textColor="white" bgColor="theme-200" blog={x}/>)}
+                                    </div>
                                 </div>
                             ) : <p className="text-white opacity-75 mt-1 block">Seems like you have not created even one blog...</p>
                         ) : <div className="-ml-1">
-                            <SocialButton svg="shadow-2md fas fa-book" color="bg-orange-500" onClick={async () => {
+                            <a className="font-changa text-white hover:underline cursor-pointer text-lg" onClick={async () => {
                                 const { data } = await axios.get(`/api/member/${id}/blogs`);
                                 setState({ ...state, blogs: data });
-                            }}>View your blogs</SocialButton>
+                            }}>View your blogs?</a>
                         </div>}
                     </div>
                 </div>

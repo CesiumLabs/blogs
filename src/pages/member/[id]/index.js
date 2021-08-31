@@ -33,9 +33,9 @@ export default function Member({ notFound, username, avatar, id, rank, bio, twit
                     backgroundColor: '#303045',
                     backgroundAttachment: 'fixed'
                 }}>
-                    <div className="md:flex md:flex-nowrap">
-                        <img className="md:w-300 rounded-full block border-4 border-blurple-default shadow-2md" src={`${avatar}`} draggable="false" alt={username} />
-                        <div className="md:mt-4 md:ml-4 text-center md:text-left">
+                    <div className="text-center">
+                        <img className="md:w-300 md:h-300 rounded-full inline-block border-4 border-blurple-default shadow-2md" src={avatar} draggable="false" alt={username} />
+                        <div className="md:mt-4 w-full">
                             <h2 className="text-white font-bold text-5xl">{username}</h2>
                             <p className="opacity-75 text-white block mb-2 -mt-2">{bio || "No description has been set!"}</p>
                             <div className="-ml-2">
@@ -63,19 +63,20 @@ export default function Member({ notFound, username, avatar, id, rank, bio, twit
                     </div>
 
                     <div className="mt-5 p-2">
-                        <h1 className="text-5xl text-white font-bold mb-1">{username}'s Blogs</h1>
-
                         {blogs ? (
                             blogs.length ? (
-                                <div className="md:flex md:flex-wrap -ml-3 w-full">
-                                    {blogs.sort((a, b) => b.updatedAt - a.updatedAt).map(x => <BlogCard textColor="white" bgColor="theme-200" blog={x}/>)}
+                                <div>
+                                    <h1 className="text-5xl text-white font-bold mb-1">{username}'s Blogs</h1>
+                                    <div className="md:flex md:flex-wrap -ml-3 w-full">
+                                        {blogs.sort((a, b) => b.updatedAt - a.updatedAt).map(x => <BlogCard textColor="white" bgColor="theme-200" blog={x}/>)}
+                                    </div> 
                                 </div>
                             ) : <p className="text-white opacity-75 mt-1 block">Seems like {username} has not created even one blog...</p>
                         ) : <div className="-ml-1">
-                            <SocialButton svg="fas fa-book" color="bg-orange-500" onClick={async () => {
+                            <a className="font-changa text-white hover:underline cursor-pointer text-lg" onClick={async () => {
                                 const { data } = await axios.get(`/api/member/${id}/blogs`);
                                 setBlogs(data);
-                            }}>View {username}'s blogs</SocialButton>
+                            }}>View {username}'s blogs?</a>
                         </div>}
                     </div>
                 </div>
