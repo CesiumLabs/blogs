@@ -11,12 +11,12 @@ export default function Home({ recents, randoms }) {
         <div className="p-8">
             <h1 className="text-5xl font-bold">Recently Added</h1>
             <div className="md:flex md:flex-wrap -ml-3 w-full">
-                {recents.sort((a, b) => b.updatedAt - a.updatedAt).map(x => <BlogCard textColor="white" bgColor="theme-200" blog={x}/>)}
+                {recents.map(x => <BlogCard textColor="white" bgColor="theme-200" blog={x}/>)}
             </div>
 
             <h1 className="text-5xl font-bold mt-8">Random</h1>
             <div className="md:flex md:flex-wrap -ml-3 w-full">
-                {randoms.sort((a, b) => b.updatedAt - a.updatedAt).map(x => <BlogCard textColor="white" bgColor="theme-200" blog={x}/>)}
+                {randoms.map(x => <BlogCard textColor="white" bgColor="theme-200" blog={x}/>)}
             </div>
         </div>
     );
@@ -33,8 +33,9 @@ export default function Home({ recents, randoms }) {
                     onKeyPress={async (e) => {
                         if (e.key == "Enter") {
                             const parsed = parseSearch(searchElement.current.value);
-                            parsed.q = encodeURIComponent(parsed.q);
-                            const { data } = await axios.get("/api/search", { headers: parsed });
+                            // Try to work on lowercase search later...
+                            parsed.q = encodeURIComponent(parsed.q.join(' '));
+                            const { data } = await axios.get("/api/search", { params: parsed });
                             setContent(<SearchContent data={data}/>);
                         }
                     }}
