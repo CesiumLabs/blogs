@@ -13,20 +13,20 @@ export default function New({ redirect }) {
     return (
         <Frame title="New" description="Add new blog.">
             <div className="p-4 md:p-10">
-                <div className="bg-theme-100 rounded-lg p-8">
-                    <h1 className="text-white text-5xl font-bold">New Blog</h1>
-                    <p className="opacity-75 text-white">Remember to make your blog perfect, attractive and useful!</p>
+                <div className="rounded-lg p-8 bg-white shadow-2md border-default border-grey-100">
+                    <h1 className="text-black text-5xl font-bold">New Blog</h1>
+                    <p className="opacity-75 text-black">Remember to make your blog perfect, attractive and useful!</p>
 
-                    <table className="text-white w-full mt-3">
+                    <table className="text-black w-full mt-3">
                         <Input name="Name" description="The name of the blog. Required." placeholder="Awesome blog." id="name_input"/>
                         <Input name="Description" description="The short description of your blog. Required." placeholder="My awesome blog." id="dsc_input"/>
                         <Input name="Tags" description="The tags for the blog. Maximum 5 tags. Seperated by comma." placeholder="tech, javascript, web" id="tags_input"/>
                         <Input name="Thumbnail" description="The thumbnail url of the flag. Required." placeholder="https://example.com/image.png" id="thumbnail_input"/>
                     </table>
 
-                    <p className="text-xl font-bold text-white">Content</p>
-                    <p className="opacity-75 mb-3 text-white">The main content part of the blog...</p>
-                    <textarea className="mt-1 rounded-sm p-2 outline-none resize-y w-full min-h-300" id="content_input"/>
+                    <p className="text-xl font-bold text-black">Content</p>
+                    <p className="opacity-75 mb-3 text-black">The main content part of the blog...</p>
+                    <textarea className="mt-1 rounded-sm p-2 outline-none resize-y w-full min-h-300 shadow-md border-default border-grey-100" id="content_input" placeholder="Your markdown content here..."/>
 
                     <a className="rounded-sm px-2 py-1 bg-teal-600 hover:bg-teal-500 mt-3 block text-center text-white cursor-pointer uppercase font-bold" onClick={async () => {
                         const blog = {
