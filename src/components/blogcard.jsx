@@ -8,7 +8,7 @@ export default function BlogCard({ blog, textColor = "black", bgColor = "white" 
         <img draggable="false" className="rounded-default block float-left h-22 w-20 m-3 border-grey-300 border-2" src={blog.thumbnail} alt={blog.name}/>
         <div className={`bg-${bgColor} rounded-b-sm p-3 rounded-default`}>
             <div className="-ml-2 pl-2">
-                {(blog.tags.length ? blog.tags : ['nil']).map((x, i) => <a className={`font-consolas text-blurple-default uppercase font-bold ${i == 0 ? "" : "ml-2"}`} href={`/?tag=${encodeURIComponent(x)}`}>{x}</a>)}
+                {(blog.tags.length ? blog.tags : ['nil']).map((x, i) => <a className={`font-consolas text-blurple-default hover:text-blurple-200 uppercase font-bold ${i == 0 ? "" : "ml-2"}`} href={`/?tag=${encodeURIComponent(x)}`}>{x}</a>)}
             </div>
 
             <a href={`/blog/${blog.id}`} className="text-2xl font-bold hover:underline cursor-pointer">{blog.name}</a>
