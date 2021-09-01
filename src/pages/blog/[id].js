@@ -16,9 +16,7 @@ export default function BlogPage({ notFound, id, name, description, thumbnail, t
                 <div className="p-4 md:p-10">
                     <div className="bg-theme-100 rounded-lg text-center text-white py-10">
                         <h1 className="font-bold text-8xl md:text-10xl">404</h1>
-                        <p className="opacity-75 text-lg -mt-2">
-                            There is no blog registered with {id}!
-                        </p>
+                        <p className="opacity-75 text-lg -mt-2">There is no blog registered with {id}!</p>
                     </div>
                 </div>
             </Frame>
@@ -42,17 +40,25 @@ export default function BlogPage({ notFound, id, name, description, thumbnail, t
 
                         {isAuthor ? (
                             <div className="-ml-1 -mt-1 mb-4">
-                                <SocialButton svg="fas fa-edit" color="bg-indigo-500" href={`/edit/${id}`}>EDIT</SocialButton>
-                                <SocialButton svg="fas fa-trash-alt" color="bg-red-600" onClick={async () => {
-                                    try {
-                                        await axios.delete(`/api/blog/${id}`);
-                                    } catch(e) {
-                                        console.log(e);
-                                        alert("Failed deleting the blog. Try to check the browser console for the error.")
-                                    }
+                                <SocialButton svg="fas fa-edit" color="bg-indigo-500" href={`/edit/${id}`}>
+                                    EDIT
+                                </SocialButton>
+                                <SocialButton
+                                    svg="fas fa-trash-alt"
+                                    color="bg-red-600"
+                                    onClick={async () => {
+                                        try {
+                                            await axios.delete(`/api/blog/${id}`);
+                                        } catch (e) {
+                                            console.log(e);
+                                            alert("Failed deleting the blog. Try to check the browser console for the error.");
+                                        }
 
-                                    window.location.href = "/";
-                                }}>DELETE</SocialButton>
+                                        window.location.href = "/";
+                                    }}
+                                >
+                                    DELETE
+                                </SocialButton>
                             </div>
                         ) : null}
 
@@ -83,7 +89,7 @@ BlogPage.getInitialProps = async (ctx) => {
     const blog = await Blog.findOne({ id: ctx.query.id });
     if (!blog) return { notFound: true };
     const authInfo = await getAuthInfo(ctx);
-    
+
     return {
         name: blog.name,
         description: blog.description,

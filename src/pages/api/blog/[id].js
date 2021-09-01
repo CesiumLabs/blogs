@@ -11,16 +11,19 @@ export default async (req, res) => {
         } else if (req.method == "POST") {
             const discordUser = await getAuthInfoAPI(req);
             if (!discordUser) return res.status(403).end();
-            await Blog.findOneAndUpdate({ id: req.query.id, author: discordUser.id }, {
-                name: req.headers.name,
-                description: decodeURIComponent(req.headers.description),
-                tags: req.headers.tags.split(","),
-                thumbnail: req.headers.thumbnail,
-                content: decodeURIComponent(req.headers.content),
-                updatedAt: new Date()
-            });
+            await Blog.findOneAndUpdate(
+                { id: req.query.id, author: discordUser.id },
+                {
+                    name: req.headers.name,
+                    description: decodeURIComponent(req.headers.description),
+                    tags: req.headers.tags.split(","),
+                    thumbnail: req.headers.thumbnail,
+                    content: decodeURIComponent(req.headers.content),
+                    updatedAt: new Date()
+                }
+            );
 
             res.status(204).end();
-        } else res.status(400).json({})
+        } else res.status(400).json({});
     } else res.status(403).json({});
 };
