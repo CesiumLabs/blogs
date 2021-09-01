@@ -17,7 +17,9 @@ export default async function connectMongoose() {
             useNewUrlParser: true,
             useUnifiedTopology: true,
             bufferCommands: false,
-            bufferMaxEntries: 0
+            bufferMaxEntries: 0,
+            useFindAndModify: false,
+            useCreateIndex: true,
         });
     }
 }
