@@ -1,11 +1,25 @@
-import { Blog } from "../../../utils/schemas";
+import { Blog, User } from "../../../utils/schemas";
 import { getAuthInfoAPI } from "../../../middleware/getAuthInfo";
 
 export default async (req, res) => {
-    if (req.method == "DELETE" && req.headers.host == process.env.HOST) {
-        const discordUser = await getAuthInfoAPI(req);
-        if (!discordUser) return res.status(403).end();
-        await Blog.findOneAndDelete({ id: req.query.id, author: discordUser.id });
-        res.status(204).end();
+    if (req.headers.host == process.env.HOST) {
+        if (req.method == "DELETE") {
+            const discordUser = await getAuthInfoAPI(req);
+            if (!discordUser) return res.status(403).end();
+            await Blog.findOneAndDelete({ id: req.query.id, author: discordUser.id });
+            res.status(204).end();
+        } else if (req.method == "POST") {
+            const discordUser = await getAuthInfoAPI(req);
+            if (!discordUser) return res.status(403).end();
+            await User.findOneAndUpdate({ id: req.query.id, author: discordUser.id }, {
+                name: req.headers.name,
+                description: decodeURIComponent(req.headers.description),
+                tags: req.headers.tags.split(","),
+                thumbnail: req.headers.thumbnail,
+                content: decodeURIComponent(req.headers.content)
+            });
+
+            res.status(204).end();
+        } else res.status(400).json({})
     } else res.status(403).json({});
 };

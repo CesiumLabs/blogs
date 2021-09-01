@@ -9,7 +9,21 @@ import Frame from "../../components/frame";
 import { SocialButton } from "../../components/button";
 import "highlight.js/styles/agate.css";
 
-export default function BlogPage({ id, name, description, thumbnail, tags, author, createdAt, updatedAt, content, isAuthor }) {
+export default function BlogPage({ notFound, id, name, description, thumbnail, tags, author, createdAt, updatedAt, content, isAuthor }) {
+    if (notFound)
+        return (
+            <Frame title="404" description={`No blog found with id ${id}!`}>
+                <div className="p-4 md:p-10">
+                    <div className="bg-theme-100 rounded-lg text-center text-white py-10">
+                        <h1 className="font-bold text-8xl md:text-10xl">404</h1>
+                        <p className="opacity-75 text-lg -mt-2">
+                            There is no blog registered with {id}!
+                        </p>
+                    </div>
+                </div>
+            </Frame>
+        );
+
     return (
         <Frame title={name} description={description} image={thumbnail}>
             <div className="p-8 w-full">
