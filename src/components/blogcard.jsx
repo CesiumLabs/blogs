@@ -1,9 +1,6 @@
 import moment from "moment";
 
 export default function BlogCard({ blog, textColor = "black", bgColor = "white" }) {
-    // TODO: Kindly remove the below code once development is over...
-    blog.thumbnail = "https://snowflakedev.org/images/logo.png";
-
     return (
         <div className={`text-${textColor} text-left mt-3 ml-3 font-changa md:max-w-md-card lg:max-w-lg-card w-full shadow-2md`}>
             <div
@@ -25,7 +22,7 @@ export default function BlogCard({ blog, textColor = "black", bgColor = "white" 
                         ))}
                     </div>
 
-                    <a href={`/blog/${blog.id}`} className="text-2xl font-bold hover:underline cursor-pointer">
+                    <a href={`/blog/${blog.id}`} className="text-2xl mb-3 block font-bold hover:underline break-words leading-none cursor-pointer">
                         {blog.name}
                     </a>
                     <p className="-mt-1 block opacity-75 mb-2">{blog.description}</p>
