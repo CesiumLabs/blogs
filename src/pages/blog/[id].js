@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import moment from "moment";
 import mongoose from "mongoose";
 import connectMongoose from "../../middleware/mongodb";
@@ -8,8 +7,6 @@ import Frame from "../../components/frame";
 import "highlight.js/styles/agate.css";
 
 export default function BlogPage({ name, description, thumbnail, tags, author, createdAt, updatedAt, content }) {
-    useEffect(() => window.addEventListener("load", () => (document.getElementById("main_content").innerHTML = renderMarkdown(content))));
-
     return (
         <Frame title={name} description={description} image={thumbnail}>
             <div className="p-8 w-full">
@@ -39,7 +36,7 @@ export default function BlogPage({ name, description, thumbnail, tags, author, c
                         ) : null}
                     </div>
                     <div className="p-6 shadow-md rounded-b-lg bg-white w-full border-default border-grey-100">
-                        <div className="mt-2" id="main_content" />
+                        <div className="mt-2" dangerouslySetInnerHTML={{ __html: renderMarkdown(content) }} />
                         <p className="mt-2 text-lg">Last updated {moment(updatedAt).fromNow()}...</p>
                     </div>
                 </div>
