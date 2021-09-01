@@ -101,7 +101,7 @@ export default function Me({ redirect, username, avatarURL, id, rank, bio, twitt
                                             setState({ ...state, ...newProfileData, openEdit: false });
                                         }}
                                         className="mt-2 cursor-pointer block rounded-sm text-white px-2 py-1 bg-red-600 w-full md:w-1/4 text-center"
-                                    >
+                                    > 
                                         Edit
                                     </a>
                                 </div>
