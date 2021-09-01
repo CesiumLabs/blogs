@@ -1,12 +1,15 @@
 import moment from "moment";
+import axios from "axios";
 import mongoose from "mongoose";
 import connectMongoose from "../../middleware/mongodb";
+import getAuthInfo from "../../middleware/getAuthInfo";
 import { Blog } from "../../utils/schemas";
 import renderMarkdown from "../../utils/markdown";
 import Frame from "../../components/frame";
+import { SocialButton } from "../../components/button";
 import "highlight.js/styles/agate.css";
 
-export default function BlogPage({ name, description, thumbnail, tags, author, createdAt, updatedAt, content }) {
+export default function BlogPage({ id, name, description, thumbnail, tags, author, createdAt, updatedAt, content, isAuthor }) {
     return (
         <Frame title={name} description={description} image={thumbnail}>
             <div className="p-8 w-full">
@@ -22,6 +25,20 @@ export default function BlogPage({ name, description, thumbnail, tags, author, c
                         </div>
 
                         <p className="opacity-80 block mt-2 mb-1 font-changa text-lg">{description}</p>
+
+                        {isAuthor ? (
+                            <div className="-ml-1 -mt-1 mb-2">
+                                <SocialButton svg="fas fa-trash-alt" color="bg-red-600" onClick={async () => {
+                                    try {
+                                        await axios.delete(`/api/blog/${id}`);
+                                    } catch(e) {
+                                        console.log(e);
+                                        alert("Failed deleting the blog. Try to check the browser console for the error.")
+                                    }
+                                    // window.location.href = "/";
+                                }}>DELETE</SocialButton>
+                            </div>
+                        ) : null}
 
                         {author ? (
                             <div>
@@ -49,6 +66,8 @@ BlogPage.getInitialProps = async (ctx) => {
     await connectMongoose();
     const blog = await Blog.findOne({ id: ctx.query.id });
     if (!blog) return { notFound: true };
+    const authInfo = await getAuthInfo(ctx);
+    
     return {
         name: blog.name,
         description: blog.description,
@@ -58,7 +77,8 @@ BlogPage.getInitialProps = async (ctx) => {
         content: blog.content,
         tags: blog.tags,
         id: blog.id,
-        thumbnail: blog.thumbnail
+        thumbnail: blog.thumbnail,
+        isAuthor: blog.author == authInfo?.id
     };
 };
 

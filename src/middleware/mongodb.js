@@ -2,6 +2,7 @@ import axios from "axios";
 import mongoose from "mongoose";
 
 export default async function connectMongoose() {
+    if (!global.authCache) global.authCache = new Map();
     if (!mongoose.connection?.readyState) {
         if (!process.env.MONGO_URI) throw "No mongo url has been provided";
         // TODO(scientific-dev): Make staffs a global variable...
