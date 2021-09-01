@@ -55,5 +55,5 @@ const user = new Schema({
     bio: String
 });
 
-export const Blog = mongoose.models.blogs || mongoose.model("blogs", blog);
-export const User = mongoose.models.users || mongoose.model("users", user);
+export const Blog = mongoose.models?.blogs || mongoose.model("blogs", blog);
+export const User = mongoose.models?.users || mongoose.model("users", user);
