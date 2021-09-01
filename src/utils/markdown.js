@@ -8,7 +8,7 @@ const slugger = new Slugger();
 marked.use({
     renderer: {
         link: (href, title, text) => {
-            return renderer.link.call(renderer, href, title, text).html.replace(/^<a /, '<a target="_blank" rel="noreferrer" class="hover:underline font-bold text-blurple-500 hover:text-blurple-600"');
+            return renderer.link.call(renderer, href, title, text).replace(/^<a /, '<a target="_blank" rel="noreferrer" class="hover:underline font-bold text-blurple-500 hover:text-blurple-600"');
         },
         script: () => `<div></div>`,
         code: (src) => {
