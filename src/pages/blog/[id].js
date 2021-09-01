@@ -41,7 +41,8 @@ export default function BlogPage({ notFound, id, name, description, thumbnail, t
                         <p className="opacity-80 block mt-2 mb-1 font-changa text-lg">{description}</p>
 
                         {isAuthor ? (
-                            <div className="-ml-1 -mt-1 mb-2">
+                            <div className="-ml-1 -mt-1 mb-4">
+                                <SocialButton svg="fas fa-edit" color="bg-indigo-500" href={`/edit/${id}`}>EDIT</SocialButton>
                                 <SocialButton svg="fas fa-trash-alt" color="bg-red-600" onClick={async () => {
                                     try {
                                         await axios.delete(`/api/blog/${id}`);
@@ -49,7 +50,8 @@ export default function BlogPage({ notFound, id, name, description, thumbnail, t
                                         console.log(e);
                                         alert("Failed deleting the blog. Try to check the browser console for the error.")
                                     }
-                                    // window.location.href = "/";
+
+                                    window.location.href = "/";
                                 }}>DELETE</SocialButton>
                             </div>
                         ) : null}
