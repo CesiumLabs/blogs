@@ -8,9 +8,7 @@ const slugger = new Slugger();
 marked.use({
     renderer: {
         link: (href, title, text) => {
-            const local = href?.startsWith(`${location.protocol}//${location.hostname}`);
-            const html = renderer.link.call(renderer, href, title, text);
-            return local ? html : html.replace(/^<a /, '<a target="_blank" rel="noreferrer" class="hover:underline font-bold text-blurple-500 hover:text-blurple-600"');
+            return renderer.link.call(renderer, href, title, text).html.replace(/^<a /, '<a target="_blank" rel="noreferrer" class="hover:underline font-bold text-blurple-500 hover:text-blurple-600"');
         },
         script: () => `<div></div>`,
         code: (src) => {
