@@ -1,4 +1,4 @@
-import { Blog, User } from "../../../utils/schemas";
+import { Blog } from "../../../utils/schemas";
 import { getAuthInfoAPI } from "../../../middleware/getAuthInfo";
 
 export default async (req, res) => {
