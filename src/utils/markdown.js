@@ -12,6 +12,7 @@ marked.use({
             const html = renderer.link.call(renderer, href, title, text);
             return local ? html : html.replace(/^<a /, '<a target="_blank" rel="noreferrer" class="text-blurple-500 hover:text-blurple-600"');
         },
+        script: () => `<div></div>`,
         code: (src) => {
             return `<pre class="my-0 text-white break-words overflow-x-auto bg-grey-900 p-5 rounded-lg"><code>${highlight.highlight(src, { language: "js" }).value}</code></pre>`;
         },
