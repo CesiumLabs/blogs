@@ -49,6 +49,7 @@ export default function New({ redirect }) {
                                 if (!blog.content) return alert("No content has been provided.");
 
                                 try {
+                                    blog.description = encodeURIComponent(blog.description);
                                     const { data } = await axios("/api/blog/new", { method: "PUT", headers: blog });
                                     window.location.href = `/blog/${data.id}`;
                                 } catch (e) {

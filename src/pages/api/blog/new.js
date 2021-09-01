@@ -10,7 +10,7 @@ export default async (req, res) => {
         const blog = await new Blog({
             id: uuid(),
             name: req.headers.name,
-            description: req.headers.description,
+            description: decodeURIComponent(req.headers.description),
             tags: req.headers.tags.split(","),
             thumbnail: req.headers.thumbnail,
             author: discordUser.id,
