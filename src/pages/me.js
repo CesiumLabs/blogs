@@ -73,8 +73,8 @@ export default function Me({ redirect, username, avatarURL, id, rank, bio, twitt
                             </div>
 
                             {state.openEdit ? (
-                                <div className="mt-3 mb-2">
-                                    <h2 className="text-white text-xl md:text-lg font-bold -mb-1">Edit Profile</h2>
+                                <div className="mt-5 mb-2 text-left">
+                                    <h2 className="text-white text-5xl font-bold">Edit Profile</h2>
                                     <EditInput name="Bio" id="bio_input" placeholder="Your profile bio here..." />
                                     <EditInput name="Twitter" id="twitter_input" placeholder="Your twitter username here..." />
                                     <EditInput name="Github" id="gh_input" placeholder="Your github username here..." />
