@@ -28,8 +28,8 @@ export default function BlogPage({ notFound, id, name, description, thumbnail, t
         <Frame title={name} description={description} image={thumbnail}>
             <div className="p-8 w-full">
                 <div className="shadow-2md rounded-lg">
-                    <div className="p-6 rounded-t-lg w-full text-white border-1 border-grey-100 border-b-none bg-theme-100">
-                        <h1 className="text-8xl font-bold">{name}</h1>
+                    <div className="p-6 rounded-t-lg w-full text-white border-1 border-grey-100 border-b-none bg-theme-100 break-words">
+                        <h1 className="text-8xl font-bold mb-3 leading-none">{name}</h1>
                         <div className="mt-1">
                             {(tags.length ? tags : ["nil"]).map((x, i) => (
                                 <a key={i} className={`font-consolas text-white rounded-sm py-1 px-2 bg-teal-600 hover:bg-teal-500 uppercase font-bold ${i == 0 ? "" : "ml-2"}`} href={`/?tag=${encodeURIComponent(x)}`}>
