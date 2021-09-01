@@ -1,6 +1,5 @@
 import moment from "moment";
 import axios from "axios";
-import mongoose from "mongoose";
 import connectMongoose from "../../middleware/mongodb";
 import getAuthInfo from "../../middleware/getAuthInfo";
 import { Blog } from "../../utils/schemas";
@@ -93,7 +92,7 @@ BlogPage.getInitialProps = async (ctx) => {
     return {
         name: blog.name,
         description: blog.description,
-        author: mongoose.staffs.get(blog.author),
+        author: global.staffs.get(blog.author),
         createdAt: blog.createdAt,
         updatedAt: blog.updatedAt,
         content: blog.content,

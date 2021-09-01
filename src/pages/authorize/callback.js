@@ -1,10 +1,9 @@
-import mongoose from "mongoose";
 import cookie from "cookie";
 import { useEffect } from "react";
 import axios from "axios";
 import connectMongoose from "../../middleware/mongodb";
 import { User } from "../../utils/schemas";
-import { getAuthID, getRank, defaultCookieOptions } from "../../utils";
+import { getRank, defaultCookieOptions } from "../../utils";
 
 export default function Callback({ redirect, forbidden, error }) {
     useEffect(() => {
@@ -27,7 +26,7 @@ Callback.getInitialProps = async (ctx) => {
         });
 
         await connectMongoose();
-        const staff = mongoose.staffs.get(data.data.id);
+        const staff = global.staffs.get(data.data.id);
         if (!staff) return { forbidden: true };
         ctx.res.setHeader("Set-Cookie", [cookie.serialize("auth_id", data.data.accessToken, defaultCookieOptions)]);
         const user = await User.findOne({ id: data.data.id });

@@ -1,4 +1,3 @@
-import mongoose from "mongoose";
 import { useState } from "react";
 import axios from "axios";
 import Frame from "../../../components/frame";
@@ -105,7 +104,7 @@ export default function Member({ notFound, username, avatar, id, rank, bio, twit
 
 Member.getInitialProps = async (ctx) => {
     await connectMongoose();
-    const staff = mongoose.staffs.get(ctx.query.id);
+    const staff = global.staffs.get(ctx.query.id);
     if (!staff) return { notFound: "is not a staff!", id: ctx.query.id };
 
     let user = await User.findOne({ id: ctx.query.id });

@@ -1,5 +1,4 @@
 import cookie from "cookie";
-import mongoose from "mongoose";
 
 export function getAuthID(req) {
     return cookie.parse(req.headers.cookie || "").auth_id;
@@ -19,7 +18,7 @@ export function createSimplifiedJSONBlog(doc) {
         thumbnail: doc.thumbnail,
         tags: doc.tags,
         createdAt: Date.parse(doc.createdAt),
-        author: mongoose.staffs.get(doc.author)
+        author: global.staffs.get(doc.author)
     };
 }
 
