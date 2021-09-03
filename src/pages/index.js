@@ -6,7 +6,7 @@ import Frame from "../components/frame";
 import BlogCard from "../components/blogcard";
 
 export default function Home({ recents, randoms, error }) {
-    // if (error) return JSON.stringify(error);
+    if (error) return JSON.stringify(error);
 
     useEffect(async () => {
         const query = new URLSearchParams(window.location.search);
