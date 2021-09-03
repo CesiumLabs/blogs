@@ -1,3 +1,4 @@
+import mongoose from "mongoose";
 import { useState, useEffect, useRef } from "react";
 import axios from "axios";
 import connectMongoose from "../middleware/mongodb";
@@ -5,7 +6,8 @@ import parseSearch from "../utils/searchParser";
 import Frame from "../components/frame";
 import BlogCard from "../components/blogcard";
 
-export default function Home({ recents, randoms }) {
+export default function Home({ recents, randoms, state }) {
+    if(state) return state.toString();
     useEffect(async () => {
         const query = new URLSearchParams(window.location.search);
         if (query.has("tag")) {
@@ -63,8 +65,8 @@ export default function Home({ recents, randoms }) {
 
 Home.getInitialProps = async () => {
     await connectMongoose();
+    return { state: mongoose.connection?.readyState }
     const { data } = await axios.get(`${process.env.URL}/api/home`);
-    return data;
 };
 
 function SearchContent({ data }) {
