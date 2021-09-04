@@ -6,7 +6,7 @@ import connectMongoose from "../../middleware/mongodb";
 export default async (req, res) => {
     if (req.method == "PUT" && req.headers.host == process.env.HOST) {
         await connectMongoose();
-        
+
         const discordUser = await getAuthInfoAPI(req);
         if (!discordUser) return res.status(403).end();
 
