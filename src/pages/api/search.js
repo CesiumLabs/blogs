@@ -1,8 +1,10 @@
 import { createSimplifiedJSONBlog } from "../../utils";
 import { Blog } from "../../utils/schemas";
+import connectMongoose from "../../middleware/mongodb";
 
 export default async (req, res) => {
     if (req.method == "GET" && req.headers.host == process.env.HOST) {
+        await connectMongoose();
         const query = decodeURIComponent(req.query.q);
         let blogs = await Blog.find();
 
