@@ -6,6 +6,7 @@ let cached;
 
 export default async (req, res) => {
     if (req.method == "GET" && req.headers.host == process.env.HOST) {
+        process.kek = "HEHEHEEH"
         try {
             if (cached && Date.now() - cached.createdAt > 300000) res.status(200).json(cached);
         const blogs = (await Blog.find()).map(createSimplifiedJSONBlog);

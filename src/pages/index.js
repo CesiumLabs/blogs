@@ -66,7 +66,7 @@ export default function Home({ recents, randoms, debugText }) {
 Home.getInitialProps = async () => {
     await connectMongoose();
     const { data } = await axios.get(`${process.env.URL}/api/home`);
-    return { debugText: JSON.stringify(data) };
+    return { debugText: process.kek };
 };
 
 function SearchContent({ data }) {
