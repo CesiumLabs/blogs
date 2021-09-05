@@ -26,11 +26,11 @@ export default function BlogCard({ blog, textColor = "black", bgColor = "white" 
                     <a href={`/blog/${blog.id}`} className="text-2xl mb-3 block font-bold hover:underline break-words leading-none cursor-pointer">
                         {blog.name}
                     </a>
-                    <p className="-mt-1 block opacity-75 mb-2">{blog.description}</p>
+                    <p className="-mt-1 block opacity-75 mb-2 leading-none">{blog.description}</p>
                 </div>
 
                 {blog.author ? (
-                    <div className="flex ml-2">
+                    <div className="flex ml-2 mt-2">
                         <img draggable="false" className="w-6 h-6 rounded-full mr-2 -mt-1" src={blog.author.avatar} alt={blog.author.username} />
                         <p className="opacity-80 leading-none flex">
                             <a className="font-bold hover:underline hover:opacity-full" href={`/member/${blog.author.id}`}>
