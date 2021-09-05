@@ -1,6 +1,6 @@
 import { User } from "../../../utils/schemas";
 import { getAuthInfoAPI } from "../../../middleware/getAuthInfo";
-import connectMongoose from "../../middleware/mongodb";
+import connectMongoose from "../../../middleware/mongodb";
 
 const headerKeys = ["bio", "twitter", "github", "website", "banner"];
 

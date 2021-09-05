@@ -1,6 +1,6 @@
 import { Blog } from "../../../../utils/schemas";
 import { createSimplifiedJSONBlog } from "../../../../utils";
-import connectMongoose from "../../middleware/mongodb";
+import connectMongoose from "../../../../middleware/mongodb";
 
 export default async (req, res) => {
     if (req.method == "GET" && req.headers.host == process.env.HOST) {

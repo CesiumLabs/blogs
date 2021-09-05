@@ -1,6 +1,6 @@
 import { Blog } from "../../../utils/schemas";
 import { getAuthInfoAPI } from "../../../middleware/getAuthInfo";
-import connectMongoose from "../../middleware/mongodb";
+import connectMongoose from "../../../middleware/mongodb";
 
 export default async (req, res) => {
     if (req.headers.host == process.env.HOST) {
