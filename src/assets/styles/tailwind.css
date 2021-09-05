@@ -35,3 +35,10 @@ body {
 .blog-md h1 {
     margin-left: 10px;
 }
+
+.blog-md blockquote {
+    border-left: 8px solid grey;
+    color: grey;
+    padding-left: 10px;
+    display: inline-block;
+}

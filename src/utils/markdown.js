@@ -12,7 +12,7 @@ marked.use({
         },
         script: () => `<div></div>`,
         code: (src) => {
-            return `<pre class="my-0 text-white break-words overflow-x-auto bg-grey-900 p-5 rounded-lg"><code>${highlight.highlight(src, { language: "js" }).value}</code></pre>`;
+            return `<pre class="mt-2 mb-1 text-white break-words overflow-x-auto bg-grey-900 p-5 rounded-lg"><code>${highlight.highlight(src, { language: "js" }).value}</code></pre>`;
         },
         image: (href, title, text) => {
             const html = renderer.image.call(renderer, href, title, text);
@@ -22,7 +22,7 @@ marked.use({
             const levels = ["34px", "34px", "26px", "1.25rem", "1.125rem", "1.1rem"];
             const slugged = slugger.slug(text);
             return stripIndents(`
-                <h${level} id="${slugged}" onclick="window.location.hash = '#${slugged}'" class="break-words cursor-pointer font-bold hover:underline" style="font-size: ${levels[level]};">${text}</h${level}>
+                <h${level} id="${slugged}" onclick="window.location.hash = '#${slugged}'" class="break-words cursor-pointer font-bold hover:underline mt-4 inline-block" style="font-size: ${levels[level]};">${text}</h${level}>
             `);
         }
     }
