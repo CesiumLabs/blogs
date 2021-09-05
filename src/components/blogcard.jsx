@@ -10,12 +10,13 @@ export default function BlogCard({ blog, textColor = "black", bgColor = "white" 
                     backgroundRepeat: "no-repeat",
                     backgroundSize: "cover",
                     backgroundBlendMode: "multiply",
-                    backgroundColor: "#303045"
+                    backgroundColor: "#303045",
+                    backgroundPosition: 'center'
                 }}
             >
                 <div className="ml-3">
                     <div className="-ml-2 pl-2">
-                        {(blog.tags.length ? blog.tags : ["nil"]).map((x, i) => (
+                        {(blog.tags.length ? blog.tags.slice(0, 3) : ["nil"]).map((x, i) => (
                             <a className={`text-sm text-blurple-default hover:text-blurple-200 uppercase font-bold ${i == 0 ? "" : "ml-2"}`} href={`/?tag=${encodeURIComponent(x)}`}>
                                 {x}
                             </a>

@@ -41,7 +41,7 @@ export default function Member({ notFound, username, avatar, id, rank, bio, twit
                         <img className="md:w-300 md:h-300 rounded-full inline-block border-4 border-blurple-default shadow-2md" src={avatar} draggable="false" alt={username} />
                         <div className="md:mt-4 w-full">
                             <h2 className="text-white font-bold text-5xl">{username}</h2>
-                            <p className="opacity-75 text-white block mb-2 -mt-2">{bio || "No description has been set!"}</p>
+                            <p className="opacity-75 text-white block mb-2 -mt-2 md:px-1/8">{bio || "No description has been set!"}</p>
                             <div className="-ml-2">
                                 {[1, 3].includes(rank) ? <i className="fas fa-tools text-red-500 text-xl ml-2" /> : null}
                                 {rank == 2 ? <i className="fas fa-code text-blurple-200 text-xl ml-2" /> : null}

@@ -26,16 +26,16 @@ export default function BlogPage({ notFound, id, name, description, thumbnail, t
             <div className="p-8 w-full">
                 <div className="shadow-2md rounded-lg">
                     <div className="p-6 rounded-t-lg w-full text-white border-1 border-grey-100 border-b-none bg-theme-100 break-words">
-                        <h1 className="text-8xl font-bold mb-3 leading-none">{name}</h1>
-                        <div className="mt-1">
+                        <h1 className="text-8xl font-bold mb-4 leading-none">{name}</h1>
+                        <div className="-ml-2">
                             {(tags.length ? tags : ["nil"]).map((x, i) => (
-                                <a key={i} className={`font-consolas text-white rounded-sm py-1 px-2 bg-teal-600 hover:bg-teal-500 uppercase font-bold ${i == 0 ? "" : "ml-2"}`} href={`/?tag=${encodeURIComponent(x)}`}>
+                                <a key={i} className="inline-block font-consolas text-white rounded-sm py-1 px-2 bg-teal-600 hover:bg-teal-500 uppercase font-bold ml-2 mt-2" href={`/?tag=${encodeURIComponent(x)}`}>
                                     {x}
                                 </a>
                             ))}
                         </div>
 
-                        <p className="opacity-80 block mt-2 mb-1 font-changa text-lg">{description}</p>
+                        <p className="opacity-80 block mt-2 mb-1 font-changa text-lg leading-1">{description}</p>
 
                         {isAuthor ? (
                             <div className="-ml-1 -mt-1 mb-4">
@@ -63,8 +63,8 @@ export default function BlogPage({ notFound, id, name, description, thumbnail, t
 
                         {author ? (
                             <div>
-                                <img className="w-5 rounded-full inline-block mr-2 -mt-1" src={author.avatar} alt={author.username} />
-                                <p className="opacity-80 leading-none inline-block">
+                                <img className="w-5 rounded-full mr-2 -mt-1 hidden md:inline-block" src={author.avatar} alt={author.username} />
+                                <p className="opacity-80 leading-1 inline-block">
                                     <a className="font-bold hover:underline hover:opacity-100" href={`/member/${author.id}`}>
                                         {author.username}
                                     </a>
@@ -74,8 +74,8 @@ export default function BlogPage({ notFound, id, name, description, thumbnail, t
                         ) : null}
                     </div>
                     <div className="p-6 shadow-md rounded-b-lg bg-white w-full border-default border-grey-100">
-                        <div className="mt-2" dangerouslySetInnerHTML={{ __html: renderMarkdown(content) }} />
-                        <p className="mt-2 text-lg">Last updated {moment(updatedAt).fromNow()}...</p>
+                        <div className="blog-md" dangerouslySetInnerHTML={{ __html: renderMarkdown(content) }} />
+                        <p className="mt-6 font-changa opacity-75 text-lg">Last updated {moment(updatedAt).fromNow()}...</p>
                     </div>
                 </div>
             </div>
@@ -109,6 +109,6 @@ function getReadTime(content) {
     if (m == 0) {
         const s = Math.round(d.asSeconds());
         if (s == 0) return "Less than a second read";
-        else return `${s} seconds read`;
-    } else return `${m} minutes read`;
+        else return `${s} second${s == 1 ? '' : 's'} read`;
+    } else return `${m} minute${m == 1 ? '' : 's'} read`;
 }

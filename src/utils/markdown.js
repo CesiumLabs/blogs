@@ -20,8 +20,9 @@ marked.use({
         },
         heading: (text, level) => {
             const levels = ["34px", "34px", "26px", "1.25rem", "1.125rem", "1.1rem"];
+            const slugged = slugger.slug(text);
             return stripIndents(`
-                <h${level} id="${slugger.slug(text)}" class="font-bold" style="font-size: ${levels[level]};">${text}</h${level}>
+                <h${level} id="${slugged}" onclick="window.location.hash = '#${slugged}'" class="break-words cursor-pointer font-bold hover:underline" style="font-size: ${levels[level]};">${text}</h${level}>
             `);
         }
     }
