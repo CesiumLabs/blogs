@@ -11,7 +11,7 @@ export default function BlogCard({ blog, textColor = "black", bgColor = "white" 
                     backgroundSize: "cover",
                     backgroundBlendMode: "multiply",
                     backgroundColor: "#303045",
-                    backgroundPosition: 'center'
+                    backgroundPosition: "center"
                 }}
             >
                 <div className="ml-3">

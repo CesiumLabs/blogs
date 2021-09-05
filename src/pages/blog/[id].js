@@ -109,6 +109,6 @@ function getReadTime(content) {
     if (m == 0) {
         const s = Math.round(d.asSeconds());
         if (s == 0) return "Less than a second read";
-        else return `${s} second${s == 1 ? '' : 's'} read`;
-    } else return `${m} minute${m == 1 ? '' : 's'} read`;
+        else return `${s} second${s == 1 ? "" : "s"} read`;
+    } else return `${m} minute${m == 1 ? "" : "s"} read`;
 }
