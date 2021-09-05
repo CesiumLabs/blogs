@@ -19,9 +19,9 @@ marked.use({
             return html.replace(/^<img /, '<img class="inline-flex rounded-sm"');
         },
         heading: (text, level) => {
-            const levels = ["4xl", "3xl", "2xl", "xl", "lg", "md"];
+            const levels = ["34px", "34px", "26px", "1.25rem", "1.125rem", "1.1rem"];
             return stripIndents(`
-                <h${level} id="${slugger.slug(text)}" class="font-bold text-${levels[level]}">${text}</h${level}>
+                <h${level} id="${slugger.slug(text)}" class="font-bold" style="font-size: ${levels[level]};">${text}</h${level}>
             `);
         }
     }
