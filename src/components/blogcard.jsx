@@ -4,7 +4,7 @@ export default function BlogCard({ blog, textColor = "black", bgColor = "white" 
     return (
         <div className={`text-${textColor} text-left mt-3 ml-3 font-changa md:max-w-md-card lg:max-w-lg-card w-full shadow-2md`}>
             <div
-                className="rounded-b-sm p-3 rounded-default flex flex-col justify-between"
+                className="rounded-b-sm p-3 rounded-default flex flex-col justify-between h-full"
                 style={{
                     backgroundImage: `url(${blog.thumbnail})`,
                     backgroundRepeat: "no-repeat",
