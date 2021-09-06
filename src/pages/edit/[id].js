@@ -18,13 +18,14 @@ export default function Edit({ notFound, id, name, description, tags = [], thumb
                 </div>
             </Frame>
         );
-    else useEffect(() => {
-        document.getElementById("name_input").value = name;
-        document.getElementById("dsc_input").value = description;
-        document.getElementById("thumbnail_input").value = thumbnail;
-        document.getElementById("tags_input").value = tags.join(", ");
-        document.getElementById("content_input").value = content;
-    }, []);
+    else
+        useEffect(() => {
+            document.getElementById("name_input").value = name;
+            document.getElementById("dsc_input").value = description;
+            document.getElementById("thumbnail_input").value = thumbnail;
+            document.getElementById("tags_input").value = tags.join(", ");
+            document.getElementById("content_input").value = content;
+        }, []);
 
     return (
         <Frame>

@@ -1,11 +1,11 @@
 import { useState, useEffect, useRef } from "react";
 import axios from "axios";
-import connectMongoose from "../middleware/mongodb";
 import parseSearch from "../utils/searchParser";
+import getLoadingMessage from "../utils/loadingMessages";
 import Frame from "../components/frame";
 import BlogCard from "../components/blogcard";
 
-export default function Home({ recents, randoms }) {
+export default function Home() {
     useEffect(async () => {
         const query = new URLSearchParams(window.location.search);
         if (query.has("tag")) {
@@ -13,24 +13,34 @@ export default function Home({ recents, randoms }) {
             const { data } = await axios.get("/api/search", { params: { tag } });
             setContent(<SearchContent data={data} />);
             searchElement.current.value = `tag:${tag}`;
+        } else {
+            const { data } = await axios.get("/api/home");
+            setContent(
+                <div className="p-8">
+                    <h1 className="text-5xl font-bold">Recently Added</h1>
+                    <div className="md:flex md:flex-wrap -ml-3 w-full">
+                        {data.recents.map((x, i) => (
+                            <BlogCard key={i} textColor="white" bgColor="theme-200" blog={x} />
+                        ))}
+                    </div>
+
+                    <h1 className="text-5xl font-bold mt-8">Random Blogs</h1>
+                    <div className="md:flex md:flex-wrap -ml-3 w-full">
+                        {data.randoms.map((x, i) => (
+                            <BlogCard key={i} textColor="white" bgColor="theme-200" blog={x} />
+                        ))}
+                    </div>
+                </div>
+            );
         }
     }, []);
 
     const searchElement = useRef(null);
     const [content, setContent] = useState(
         <div className="p-8">
-            <h1 className="text-5xl font-bold">Recently Added</h1>
-            <div className="md:flex md:flex-wrap -ml-3 w-full">
-                {recents.map((x, i) => (
-                    <BlogCard key={i} textColor="white" bgColor="theme-200" blog={x} />
-                ))}
-            </div>
-
-            <h1 className="text-5xl font-bold mt-8">Random Blogs</h1>
-            <div className="md:flex md:flex-wrap -ml-3 w-full">
-                {randoms.map((x, i) => (
-                    <BlogCard key={i} textColor="white" bgColor="theme-200" blog={x} />
-                ))}
+            <div className="text-center">
+                <h1 className="text-2xl font-bold">Loading blogs...</h1>
+                <h1>{getLoadingMessage()}</h1>
             </div>
         </div>
     );
@@ -60,12 +70,6 @@ export default function Home({ recents, randoms }) {
         </Frame>
     );
 }
-
-Home.getInitialProps = async () => {
-    await connectMongoose();
-    const { data } = await axios.get(`${process.env.URL}/api/home`);
-    return data;
-};
 
 function SearchContent({ data }) {
     return (
