@@ -3,20 +3,33 @@ import { useEffect, useState } from "react";
 import Frame from "../components/frame";
 import BlogCard from "../components/blogcard";
 import { SocialButton } from "../components/button";
-import connectMongoose from "../middleware/mongodb";
-import getAuthInfo from "../middleware/getAuthInfo";
-import { User } from "../utils/schemas";
 
-export default function Me({ redirect, username, avatarURL, id, rank, bio, twitter, github, website, banner }) {
-    if (redirect) {
-        useEffect(() => (window.location.href = "/api/panel/login"), []);
-        return null;
-    }
+export default function Me() {
+    const [state, setState] = useState({ loaded: false, caughtError: false, openEdit: false, blogs: null });
+    
+    useEffect(async () => {
+        // This part of code is only for development purposes and is better to keep while production too..
+        if (state.caughtError) return;
 
-    const [state, setState] = useState({ bio, twitter, github, website, banner, openEdit: false, blogs: null });
+        try {
+            const { data } = await axios.get("/api/me");
+            setState({ ...state, ...data });
+        } catch (e) {
+            if (e.response) {
+                if (e.response.status == 404) window.location.href = "/api/panel/login";
+                else {
+                    console.log(e);
+                    setState({ ...state, caughtError: true });
+                    alert("Looks like the server has encountered an error. Try to report the error logged in the browser console!")
+                }
+            }
+
+            window.location.href = "/api/panel/login";
+        }
+    }, []);
 
     useEffect(() => {
-        if (state.openEdit) {
+        if (state.openEdit && state.loaded) {
             document.getElementById("bio_input").value = state.bio || "";
             document.getElementById("twitter_input").value = state.twitter || "";
             document.getElementById("gh_input").value = state.github || "";
@@ -26,7 +39,7 @@ export default function Me({ redirect, username, avatarURL, id, rank, bio, twitt
     }, [state.openEdit]);
 
     return (
-        <Frame title={username} description={state.bio || `The profile of ${username}.`}>
+        <Frame title={state.username} description={state.bio || `The profile of ${state.username}.`}>
             <div className="p-4 md:p-10">
                 <div
                     className="shadow-2md rounded-lg p-4 md:p-8"
@@ -40,13 +53,13 @@ export default function Me({ redirect, username, avatarURL, id, rank, bio, twitt
                     }}
                 >
                     <div className="text-center">
-                        <img className="md:w-300 md:h-300 rounded-full inline-block border-4 border-blurple-default shadow-2md" src={`${avatarURL}?size=2048`} draggable="false" alt={username} />
+                        <img className="md:w-300 md:h-300 rounded-full inline-block border-4 border-blurple-default shadow-2md" src={state.avatarURL ? `${state.avatarURL}?size=2048` : 'https://snowflakedev.org/images/logo.png'} draggable="false" alt={state.username} />
                         <div className="md:mt-4 w-full">
-                            <h2 className="text-white font-bold text-5xl">{username}</h2>
+                            <h2 className="text-white font-bold text-5xl">{state.username}</h2>
                             <p className="opacity-75 text-white block mb-2 -mt-2 md:px-1/8">{state.bio || "No description has been set!"}</p>
                             <div className="-ml-2">
-                                {[1, 3].includes(rank) ? <i className="fas fa-tools text-red-500 text-xl ml-2" /> : null}
-                                {rank == 2 ? <i className="fas fa-code text-blurple-200 text-xl ml-2" /> : null}
+                                {[1, 3].includes(state.rank) ? <i className="fas fa-tools text-red-500 text-xl ml-2" /> : null}
+                                {state.rank == 2 ? <i className="fas fa-code text-blurple-200 text-xl ml-2" /> : null}
                             </div>
                             <div className="-ml-1 mt-2">
                                 <SocialButton onClick={() => setState({ ...state, openEdit: !state.openEdit })} svg="fa fa-edit" color="bg-red-500">
@@ -130,7 +143,7 @@ export default function Me({ redirect, username, avatarURL, id, rank, bio, twitt
                                 <a
                                     className="font-changa text-white hover:underline cursor-pointer text-lg"
                                     onClick={async () => {
-                                        const { data } = await axios.get(`/api/member/${id}/blogs`);
+                                        const { data } = await axios.get(`/api/member/${state.id}/blogs`);
                                         setState({ ...state, blogs: data });
                                     }}
                                 >
@@ -144,20 +157,6 @@ export default function Me({ redirect, username, avatarURL, id, rank, bio, twitt
         </Frame>
     );
 }
-
-Me.getInitialProps = async (ctx) => {
-    const discordUser = await getAuthInfo(ctx);
-    if (!discordUser) return { redirect: true };
-
-    await connectMongoose();
-    let user = await User.findOne({ id: discordUser.id });
-    if (!user) return { redirect: true };
-
-    return {
-        ...discordUser,
-        ...user.toJSON()
-    };
-};
 
 function EditInput({ name, id, placeholder }) {
     return (
