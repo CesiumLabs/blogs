@@ -76,7 +76,7 @@ export default function Member({ notFound, username, avatar, id, rank, bio, twit
                     {blogs ? (
                         blogs.length ? (
                             <div>
-                                <h1 className="text-5xl text-white font-bold mb-1">{username}'s Blogs</h1>
+                                <h1 className="text-5xl font-bold mb-1 mt-2">Blogs</h1>
                                 <div className="md:flex md:flex-wrap -ml-3 w-full">
                                     {blogs
                                         .sort((a, b) => b.updatedAt - a.updatedAt)
@@ -86,12 +86,12 @@ export default function Member({ notFound, username, avatar, id, rank, bio, twit
                                 </div>
                             </div>
                         ) : (
-                            <p className="text-white opacity-75 mt-1 block">Seems like {username} has not created even one blog...</p>
+                            <p className="opacity-75 mt-1 block">Seems like {username} has not created even one blog...</p>
                         )
                     ) : (
                         <div className="-ml-1">
                             <a
-                                className="font-changa text-white hover:underline cursor-pointer text-lg"
+                                className="font-changa hover:underline cursor-pointer text-lg"
                                 onClick={async () => {
                                     const { data } = await axios.get(`/api/member/${id}/blogs`);
                                     setBlogs(data);
