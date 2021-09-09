@@ -25,23 +25,28 @@ export default function Member({ notFound, username, avatar, id, rank, bio, twit
 
     return (
         <Frame title={username} description={bio || `The profile of ${username}.`}>
+            <div
+                style={{
+                    backgroundImage: banner ? `url(${banner})` : null,
+                    backgroundRepeat: "no-repeat",
+                    backgroundSize: "cover",
+                    backgroundBlendMode: "multiply",
+                    backgroundColor: "#303045",
+                    backgroundPosition: "center",
+                    height: "40vh",
+                    width: "100%"
+                }}
+            />
+
             <div className="p-4 md:p-10">
-                <div
-                    className="shadow-2md rounded-lg p-4 md:p-8"
-                    style={{
-                        backgroundImage: banner ? `url(${banner})` : null,
-                        backgroundRepeat: "no-repeat",
-                        backgroundSize: "cover",
-                        backgroundBlendMode: "multiply",
-                        backgroundColor: "#303045",
-                        backgroundAttachment: "fixed"
-                    }}
-                >
-                    <div className="text-center">
-                        <img className="md:w-300 md:h-300 rounded-full inline-block border-4 border-blurple-default shadow-2md" src={avatar} draggable="false" alt={username} />
-                        <div className="md:mt-4 w-full">
-                            <h2 className="text-white font-bold text-5xl">{username}</h2>
-                            <p className="opacity-75 text-white block mb-2 -mt-2 md:px-1/8">{bio || "No description has been set!"}</p>
+                <div className="-mb-4" style={{
+                    marginTop: "-30vh"
+                }}>
+                    <div className="text-center md:text-left md:flex md:flex-nowrap md:content-evely">
+                        <img className="md:w-300 md:h-300 rounded-lg inline-block border-default border-grey-100 shadow-2md" src={avatar} draggable="false" alt={username} />
+                        <div className="w-full md:ml-4 md:mt-1 rounded-lg shadow-2md p-4 md:p-8 border-default border-grey-100 w-full bg-white">
+                            <h2 className="font-bold text-5xl">{username}</h2>
+                            <p className="opacity-75 block mb-2 -mt-2">{bio || "No description has been set!"}</p>
                             <div className="-ml-2">
                                 {[1, 3].includes(rank) ? <i className="fas fa-tools text-red-500 text-xl ml-2" /> : null}
                                 {rank == 2 ? <i className="fas fa-code text-blurple-200 text-xl ml-2" /> : null}
@@ -65,37 +70,37 @@ export default function Member({ notFound, username, avatar, id, rank, bio, twit
                             </div>
                         </div>
                     </div>
+                </div>
 
-                    <div className="mt-5 p-2">
-                        {blogs ? (
-                            blogs.length ? (
-                                <div>
-                                    <h1 className="text-5xl text-white font-bold mb-1">{username}'s Blogs</h1>
-                                    <div className="md:flex md:flex-wrap -ml-3 w-full">
-                                        {blogs
-                                            .sort((a, b) => b.updatedAt - a.updatedAt)
-                                            .map((x, i) => (
-                                                <BlogCard key={i} textColor="white" bgColor="theme-200" blog={x} />
-                                            ))}
-                                    </div>
+                <div className="mt-5 p-2">
+                    {blogs ? (
+                        blogs.length ? (
+                            <div>
+                                <h1 className="text-5xl text-white font-bold mb-1">{username}'s Blogs</h1>
+                                <div className="md:flex md:flex-wrap -ml-3 w-full">
+                                    {blogs
+                                        .sort((a, b) => b.updatedAt - a.updatedAt)
+                                        .map((x, i) => (
+                                            <BlogCard key={i} textColor="white" bgColor="theme-200" blog={x} />
+                                        ))}
                                 </div>
-                            ) : (
-                                <p className="text-white opacity-75 mt-1 block">Seems like {username} has not created even one blog...</p>
-                            )
-                        ) : (
-                            <div className="-ml-1">
-                                <a
-                                    className="font-changa text-white hover:underline cursor-pointer text-lg"
-                                    onClick={async () => {
-                                        const { data } = await axios.get(`/api/member/${id}/blogs`);
-                                        setBlogs(data);
-                                    }}
-                                >
-                                    View {username}'s blogs?
-                                </a>
                             </div>
-                        )}
-                    </div>
+                        ) : (
+                            <p className="text-white opacity-75 mt-1 block">Seems like {username} has not created even one blog...</p>
+                        )
+                    ) : (
+                        <div className="-ml-1">
+                            <a
+                                className="font-changa text-white hover:underline cursor-pointer text-lg"
+                                onClick={async () => {
+                                    const { data } = await axios.get(`/api/member/${id}/blogs`);
+                                    setBlogs(data);
+                                }}
+                            >
+                                View {username}'s blogs?
+                            </a>
+                        </div>
+                    )}
                 </div>
             </div>
         </Frame>
