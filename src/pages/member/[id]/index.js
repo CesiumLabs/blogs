@@ -13,10 +13,10 @@ export default function Member({ notFound, username, avatar, id, rank, bio, twit
         return (
             <Frame title="404" description={`No staff found with id ${id}!`}>
                 <div className="p-4 md:p-10">
-                    <div className="bg-theme-100 rounded-lg text-center text-white py-10">
-                        <h1 className="font-bold text-8xl md:text-10xl">404</h1>
-                        <p className="opacity-75 text-lg -mt-2">
-                            User {id} {notFound}
+                    <div className="bg-white shadow-2md border-default border-grey-100 rounded-lg p-10">
+                        <h1 className="font-bold text-8xl -mt-1 md:text-10xl font-changa">404</h1>
+                        <p className="opacity-75 text-lg -mt-8 md:w-3/4 leading-none font-changa mb-2">
+                            User {id} {notFound}. If you still think you are the right page, either you are hallucinating or the one who gave this link ¯\_(ツ)_/¯
                         </p>
                     </div>
                 </div>
