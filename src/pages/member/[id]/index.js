@@ -44,7 +44,7 @@ export default function Member({ notFound, username, avatar, id, rank, bio, twit
                 }}>
                     <div className="text-center md:text-left md:flex md:flex-nowrap md:content-evely">
                         <img className="md:w-300 md:h-300 rounded-lg inline-block border-default border-grey-100 shadow-2md" src={avatar} draggable="false" alt={username} />
-                        <div className="w-full md:ml-4 md:mt-1 rounded-lg shadow-2md p-4 md:p-8 border-default border-grey-100 w-full bg-white">
+                        <div className="w-full mt-5 md:ml-4 md:mt-1 rounded-lg shadow-2md p-4 md:p-8 border-default border-grey-100 w-full bg-white">
                             <h2 className="font-bold text-5xl">{username}</h2>
                             <p className="opacity-75 block mb-2 -mt-2">{bio || "No description has been set!"}</p>
                             <div className="-ml-2">

@@ -11,7 +11,7 @@ export default async (req, res) => {
         if (!discordUser) return res.status(403).end();
 
         const newUser = {};
-        for (const key of headerKeys) if (req.headers[key]) newUser[key] = req.headers[key];
+        for (const key of headerKeys) newUser[key] = req.headers[key] ?? null;
 
         await User.findOneAndUpdate({ id: discordUser.id }, newUser);
         res.status(204).end();
