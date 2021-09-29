@@ -7,7 +7,7 @@ import { SocialButton } from "../components/button";
 export default function Me() {
     const [state, setState] = useState({ loaded: false, caughtError: false, openEdit: false });
     const [blogs, setBlogs] = useState(null);
-    
+
     useEffect(async () => {
         // This part of code is only for development purposes and is better to keep while production too..
         if (state.caughtError) return;
@@ -21,7 +21,7 @@ export default function Me() {
                 else {
                     console.log(e);
                     setState({ ...state, caughtError: true });
-                    alert("Looks like the server has encountered an error. Try to report the error logged in the browser console!")
+                    alert("Looks like the server has encountered an error. Try to report the error logged in the browser console!");
                 }
             }
 
@@ -55,11 +55,14 @@ export default function Me() {
             />
 
             <div className="p-4 md:p-10">
-                <div className="-mb-4" style={{
-                    marginTop: "-30vh"
-                }}>
+                <div
+                    className="-mb-4"
+                    style={{
+                        marginTop: "-30vh"
+                    }}
+                >
                     <div className="text-center md:text-left md:flex md:flex-nowrap md:content-evely">
-                        <img className="md:w-300 md:h-300 rounded-lg inline-block border-default border-grey-100 shadow-2md" src={state.avatarURL + '?size=2048'} draggable="false" alt={state.username} />
+                        <img className="md:w-300 md:h-300 rounded-lg inline-block border-default border-grey-100 shadow-2md" src={state.avatarURL + "?size=2048"} draggable="false" alt={state.username} />
                         <div className="w-full mt-5 md:ml-4 md:mt-1 rounded-lg shadow-2md p-4 md:p-8 border-default border-grey-100 w-full bg-white">
                             <h2 className="font-bold text-5xl">{state.username}</h2>
                             <p className="opacity-75 block mb-2 -mt-2">{state.bio || "No description has been set!"}</p>

@@ -39,9 +39,12 @@ export default function Member({ notFound, username, avatar, id, rank, bio, twit
             />
 
             <div className="p-4 md:p-10">
-                <div className="-mb-4" style={{
-                    marginTop: "-30vh"
-                }}>
+                <div
+                    className="-mb-4"
+                    style={{
+                        marginTop: "-30vh"
+                    }}
+                >
                     <div className="text-center md:text-left md:flex md:flex-nowrap md:content-evely">
                         <img className="md:w-300 md:h-300 rounded-lg inline-block border-default border-grey-100 shadow-2md" src={avatar} draggable="false" alt={username} />
                         <div className="w-full mt-5 md:ml-4 md:mt-1 rounded-lg shadow-2md p-4 md:p-8 border-default border-grey-100 w-full bg-white">
